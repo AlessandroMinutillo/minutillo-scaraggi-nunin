@@ -4,11 +4,11 @@ import msn.weather_app.model.Metadata;
 
 public class DatabaseClass {
 
-	private static ArrayList<Metadata> meta = new ArrayList<Metadata>();
+	private static ArrayList<Metadata> metadata = new ArrayList<Metadata>();
 	
 	public static ArrayList<Metadata> getMeta(){
-		meta.add(new Metadata("temp","temperatura","String"));
-		meta.add(new Metadata("press","pressione","String"));
-		return meta;
+		metadata.add(new Metadata("Temp","temperatura","String"));
+		metadata.add(new Metadata("Press","pressione","String"));
+		return metadata;
 	}
 }
