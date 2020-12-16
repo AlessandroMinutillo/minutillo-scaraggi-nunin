@@ -1,0 +1,1 @@
+[{"epoch": 1000, "press": 1020,"temp" : {"cur": 3, "min": 4, "max" :5}, "city" : { "name" : "Montesilvano", "coord" : {"lat" : 10, "lon" : 20}}}]
