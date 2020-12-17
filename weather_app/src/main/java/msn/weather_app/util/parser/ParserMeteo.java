@@ -58,4 +58,15 @@ public static ArrayList<RecordMeteo> load() {
 		return new RecordMeteo(temp,press,epoch,city);
 	}
 	
+	public static RecordMeteo JSONtoMeteo(JSONObject obj){
+		JSONObject main =obj.getJSONObject("main");
+		JSONObject coord= obj.getJSONObject("coord");
+		double press=main.getDouble("pressure");
+		long epoch=obj.getLong("dt");
+		Temp temp= new Temp(main.getDouble("temp"), main.getDouble("temp_min"), main.getDouble("temp_max"));
+		City city =new City(obj.getString("name"), new Coord(coord.getDouble("lat"),coord.getDouble("lon")));
+		
+		RecordMeteo res=new RecordMeteo(temp, press, epoch, city);
+		return res;
+	}
 }
