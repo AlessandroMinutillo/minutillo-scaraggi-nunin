@@ -7,6 +7,8 @@ import msn.weather_app.model.City;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.service.OpenWeatherService;
 import msn.weather_app.database.DatabaseClass;
+import msn.weather_app.exception.CoordException;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,7 +45,7 @@ public class APIController {
 	
 	
 	@GetMapping("/now")
-	public RecordMeteo getMeteoNow(@RequestParam(name="lat",defaultValue = "0")String lat ,@RequestParam(name="lon",defaultValue = "0") String lon) {
+	public RecordMeteo getMeteoNow(@RequestParam(name="lat",defaultValue = "0")String lat ,@RequestParam(name="lon",defaultValue = "0") String lon) throws CoordException {
 	
 		return OpenWeatherService.APICall(lat,lon);
 	}
