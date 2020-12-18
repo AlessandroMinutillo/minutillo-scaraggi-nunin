@@ -23,5 +23,9 @@ public class Coord {
 	public void setLon(double lon) {
 		this.lon = lon;
 	}
-	
+	public boolean validate() {
+		return (this.lat>=-90 && this.lat<=90) 
+							  && 
+			   (this.lon>=-180 && this.lon<=180);
+	}
 }
