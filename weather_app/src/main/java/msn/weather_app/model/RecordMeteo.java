@@ -13,6 +13,9 @@ public class RecordMeteo {
 		this.city = city;
 	}
 	
+	public RecordMeteo() {
+	}
+
 	public Temp getTemp() {
 		return temp;
 	}
