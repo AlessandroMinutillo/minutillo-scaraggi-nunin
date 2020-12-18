@@ -1,9 +1,13 @@
 package msn.weather_app.database;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.model.City;
+import msn.weather_app.util.filter.Filter;
+import msn.weather_app.util.filter.FilterSubstrC;
 import msn.weather_app.util.parser.*;
 
 
@@ -36,6 +40,16 @@ public class DatabaseClass {
 	
 	public static ArrayList<RecordMeteo> getMeteoData(){
 		return meteoData;
+	}
+	
+	public static ArrayList<City> getSearchedCity(String string){
+		
+		Filter<City> f = new FilterSubstrC(string);
+		
+		List<City> result = getCityList().stream()
+							.filter(f.getLogic())
+							.collect(Collectors.toList()); 
+        return new ArrayList<City>(result);
 	}
 	
 	public static void loadCityList() {

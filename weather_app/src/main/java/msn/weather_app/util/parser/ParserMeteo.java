@@ -26,7 +26,6 @@ public static ArrayList<RecordMeteo> load() {
 			//String data = fin.nextLine();
 			String data = fin.readLine();
 			
-			
 			fin.close();
 			JSONArray v = new JSONArray(data);
 			
@@ -47,6 +46,7 @@ public static ArrayList<RecordMeteo> load() {
 		
 		long epoch = top.getLong("epoch");
 		double press = top.getDouble("press");
+		
 		JSONObject obj1 = top.getJSONObject("city");
 		JSONObject obj2 = top.getJSONObject("temp");
 		JSONObject obj3 = obj1.getJSONObject("coord");
@@ -54,7 +54,8 @@ public static ArrayList<RecordMeteo> load() {
 		String name = obj1.getString("name");
 		Coord coord = new Coord(obj3.getDouble("lat"),obj3.getDouble("lon"));
 		City city = new City(name,coord);
-		Temp temp = new Temp(obj2.getDouble("cur"),obj2.getDouble("min"),obj2.getDouble("max"));
+		Temp temp = new Temp(obj2.getDouble("cur"),obj2.getDouble("min"),obj2.getDouble("max"),obj2.getDouble("felt"));
+		
 		return new RecordMeteo(temp,press,epoch,city);
 	}
 	
