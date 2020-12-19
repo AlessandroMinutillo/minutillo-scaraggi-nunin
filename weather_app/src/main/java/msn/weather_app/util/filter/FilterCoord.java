@@ -1,6 +1,7 @@
 package msn.weather_app.util.filter;
 
 import msn.weather_app.model.Coord;
+
 import msn.weather_app.model.RecordMeteo;
 
 public class FilterCoord extends Filter<RecordMeteo>{
