@@ -15,8 +15,18 @@ import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.util.parser.ParserMeteo;
 import msn.weather_app.exception.CoordException;
 public class OpenWeatherService {
-	
+	/**
+	 * Effettua una richiesta alle API di Openweather restituendo un RecordMeteo
+	 * contenente il meteo (attuale) di una coppia di coordinate geografiche valide
+	 * @param lat la latitudine geografica della città 
+	 * @param lon la longitudine geografica della città
+	 * @return l' oggetto RecordMeteo contenente il meteo attuale alle coordinate passate
+	 * @throws CoordException
+	 * @see CoordException
+	 * @see RecordMeteo
+	 */
 	public static RecordMeteo APICall (String lat, String lon) throws CoordException {
+	
 		String url=new String ();
 		JSONObject ret=new JSONObject();
 		String file = new String ();

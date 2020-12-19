@@ -7,7 +7,11 @@ import msn.weather_app.database.DatabaseClass;
 
 @SpringBootApplication
 public class WeatherAppApplication {
-	//questo è un commento
+	/**
+	 * carica i file di configurazione e avvia l' applicazione SpringBoot
+	 * @param args
+	 * 
+	 */
 	public static void main(String[] args) {
 		DatabaseClass.loadCityList();
 		DatabaseClass.loadMeteoData();

@@ -43,7 +43,13 @@ public class APIController {
 		return FilterService.getMeteoFilteredData();
 	}*/
 	
-	
+	/**
+	 * Restituisce il meteo corrente di una coppia di coordinate geografiche valide come JSONObject
+	 * @param lat
+	 * @param lon
+	 * @return	
+	 * @throws CoordException
+	 */
 	@GetMapping("/now")
 	public RecordMeteo getMeteoNow(@RequestParam(name="lat",defaultValue = "0")String lat ,@RequestParam(name="lon",defaultValue = "0") String lon) throws CoordException {
 	

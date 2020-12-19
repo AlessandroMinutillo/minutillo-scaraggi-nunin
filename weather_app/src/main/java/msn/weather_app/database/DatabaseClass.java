@@ -9,7 +9,11 @@ import msn.weather_app.model.City;
 import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.filter.FilterSubstrC;
 import msn.weather_app.util.parser.*;
-
+/**
+ * contiene i dati del meteo e delle città esistenti
+ * @see City, RecordMeteo
+ *
+ */
 
 public class DatabaseClass {
 
@@ -33,15 +37,25 @@ public class DatabaseClass {
 		metadata.add(new Metadata("PressVar","Varianza della pressione (hPa)","Double"));
 		return metadata;
 	}
-	
+	/**
+	 * restituisce la lista delle città
+	 * @return cityList
+	 */
 	public static ArrayList<City> getCityList(){
 		return cityList;
 	}
-	
+	/**
+	 * restituisce la lista delle rilevazioni meteo
+	 * @return meteodata
+	 */
 	public static ArrayList<RecordMeteo> getMeteoData(){
 		return meteoData;
 	}
-	
+	/**
+	 * restituisce la lista delle città in base a un determinato filtro
+	 * @param string
+	 * @return
+	 */
 	public static ArrayList<City> getSearchedCity(String string){
 		
 		Filter<City> f = new FilterSubstrC(string);
@@ -51,11 +65,15 @@ public class DatabaseClass {
 							.collect(Collectors.toList()); 
         return new ArrayList<City>(result);
 	}
-	
+	/**
+	 * carica la lista delle città dal file di configurazione city.list.min.json
+	 */
 	public static void loadCityList() {
 		cityList = ParserCity.load();
 	}
-	
+	/**
+	 * carica la lista delle rilevazioni meteo dal file meteo.data.json
+	 */
 	public static void loadMeteoData() {
 		meteoData = ParserMeteo.load();
 	}
