@@ -21,8 +21,8 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 	}
 	
 	private void buildLogic(Object param) {
-		String string = (String) param;
-		long now = 0; // epoch in questo momento
+		String string = param.toString();
+		long now = System.currentTimeMillis()/1000; // epoch now
 		switch(string) {
 			case "day":{
 				logic = rm -> rm.getEpoch() >= now - EpochValue.DAY.value;

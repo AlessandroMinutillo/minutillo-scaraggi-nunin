@@ -6,10 +6,14 @@ import msn.weather_app.model.Metadata;
 import msn.weather_app.model.City;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.service.OpenWeatherService;
+import msn.weather_app.util.filter.Filter;
+import msn.weather_app.util.parser.ParserFilter;
 import msn.weather_app.database.DatabaseClass;
 import msn.weather_app.exception.CoordException;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,15 +37,22 @@ public class APIController {
 		return DatabaseClass.getMeteoData();
 	}
 	
+	@PostMapping("/data/meteo/filtered")
+	public ArrayList<RecordMeteo> getMeteoFiltered(@RequestBody String body){
+		try {
+			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
+			return DatabaseClass.getSearchedRecord(filter);
+		}
+		catch(JSONException e) {
+			System.out.println("Malformed JSONObject: returning empty array\n" + e);
+			return new ArrayList<RecordMeteo>();
+		}
+	}
+	
 	@GetMapping("/dictionary")
 	public ArrayList<City> searchCity(@RequestParam(name = "string")String string){
 		return DatabaseClass.getSearchedCity(string);
 	}
-	
-	/*@PostMapping("/data/meteo/filtered")
-	public ArrayList<RecordMeteo> getMeteoFiltered(@RequestBody JSONObject body){
-		return FilterService.getMeteoFilteredData();
-	}*/
 	
 	/**
 	 * Restituisce il meteo corrente di una coppia di coordinate geografiche valide come JSONObject

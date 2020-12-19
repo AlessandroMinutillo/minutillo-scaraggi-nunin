@@ -6,9 +6,7 @@ public class Filter<T>{
 	
 	protected Predicate <T> logic;
 	
-	public Filter() {
-		logic = rm -> true;
-	}
+	public Filter() {}
 	
 	public Filter(Predicate <T> logic) {
 		this.logic = logic;

@@ -1,10 +1,9 @@
 package msn.weather_app.database;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.RecordMeteo;
+import msn.weather_app.service.FilterService;
 import msn.weather_app.model.City;
 import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.filter.FilterSubstrC;
@@ -57,14 +56,15 @@ public class DatabaseClass {
 	 * @return
 	 */
 	public static ArrayList<City> getSearchedCity(String string){
-		
-		Filter<City> f = new FilterSubstrC(string);
-		
-		List<City> result = getCityList().stream()
-							.filter(f.getLogic())
-							.collect(Collectors.toList()); 
-        return new ArrayList<City>(result);
+		FilterService <City> fs = new FilterService <City>();
+        return fs.applyFilter(new FilterSubstrC(string), cityList);
 	}
+	
+	public static ArrayList<RecordMeteo> getSearchedRecord(Filter<RecordMeteo> filter){
+		FilterService <RecordMeteo> fs = new FilterService <RecordMeteo>();
+        return fs.applyFilter(filter, meteoData);
+	}
+	
 	/**
 	 * carica la lista delle città dal file di configurazione city.list.min.json
 	 */

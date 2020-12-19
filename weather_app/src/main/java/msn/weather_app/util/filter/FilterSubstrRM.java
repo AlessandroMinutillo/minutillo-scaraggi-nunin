@@ -12,6 +12,7 @@ public class FilterSubstrRM extends Filter<RecordMeteo>{
 		String string = (String) param;
 		String arr[] = string.split(";");
 		
+		logic = rm -> false;
 		for(String s: arr)
 			logic = logic.or(rm -> rm.getCity().getName().contains(s));
 	}
