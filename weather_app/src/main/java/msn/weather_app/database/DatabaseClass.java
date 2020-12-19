@@ -69,12 +69,14 @@ public class DatabaseClass {
 	 * carica la lista delle città dal file di configurazione city.list.min.json
 	 */
 	public static void loadCityList() {
-		cityList = ParserCity.load();
+		ParserCity parser =new ParserCity();
+		cityList = parser.load();
 	}
 	/**
 	 * carica la lista delle rilevazioni meteo dal file meteo.data.json
 	 */
 	public static void loadMeteoData() {
-		meteoData = ParserMeteo.load();
+		ParserMeteo parser= new ParserMeteo();
+		meteoData = parser.load();
 	}
 }

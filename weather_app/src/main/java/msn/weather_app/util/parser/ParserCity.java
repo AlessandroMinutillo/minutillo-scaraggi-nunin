@@ -11,9 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ParserCity {
+public class ParserCity implements Parser<City>{
 	
-	public static ArrayList<City> load() {
+	public  ArrayList<City> load() {
 		
 		ArrayList<City> cityList = new ArrayList<City>();
 		
