@@ -1,5 +1,11 @@
 package msn.weather_app;
-
+/**
+ * Implementazione della classe WeatherAppApplication
+ *  
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,9 +14,10 @@ import msn.weather_app.database.DatabaseClass;
 @SpringBootApplication
 public class WeatherAppApplication {
 	/**
-	 * carica i file di configurazione e avvia l' applicazione SpringBoot
+	 * Carica i file di configurazione e avvia l'applicazione SpringBoot
 	 * @param args
-	 * 
+	 * @see msn.weather_app.database.DatabaseClass#loadCityList()
+	 * @see msn.weather_app.database.DatabaseClass#loadMeteoData()
 	 */
 	public static void main(String[] args) {
 		DatabaseClass.loadCityList();
