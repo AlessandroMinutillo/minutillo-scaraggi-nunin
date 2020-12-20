@@ -1,10 +1,8 @@
 package msn.weather_app.controller;
 /**
  * Implementazione della classe APIController
- * 
  * In questa classe verranno definite tutti i possbili metodi GET e POST 
  * della nostra SpringBootApp
- * 
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
  * @author Davide Nunin

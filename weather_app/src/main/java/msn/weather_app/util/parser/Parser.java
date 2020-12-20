@@ -4,6 +4,4 @@ import java.util.ArrayList;
 
 public interface Parser<E>{
 	public ArrayList<E> load();
-	
-	
 }

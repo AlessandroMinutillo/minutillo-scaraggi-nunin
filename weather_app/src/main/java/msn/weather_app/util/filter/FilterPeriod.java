@@ -1,16 +1,23 @@
 package msn.weather_app.util.filter;
 
+/**
+ * Implementazione della classe FilterPeriod
+ *  
+ * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * seleziona tutti i RecordMeteo che corrispondono al periodo inserito come parametro di ricerca
+ *  
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
 import msn.weather_app.exception.FilterException;
 import msn.weather_app.model.RecordMeteo;
 
-/* Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
- * seleziona tutti i RecordMeteo che corrispondono al periodo inserito come parametro di ricerca
- */
 
 public class FilterPeriod extends Filter<RecordMeteo>{
 	
-	/* Enum che associa a ciascuna unità di tempo il corrispondente valore in secondi
-	 * 
+	/**
+	 * Enum che associa a ciascuna unità di tempo il corrispondente valore in secondi
 	 */
 	
 	private enum EpochValue {
@@ -24,14 +31,21 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 			this.value = value;
 		}
 	}
-	
+	/**
+	 * Costruttore
+	 * @param rappresenta l'oggetto passato
+	 * @see msn.weather_app.util.filter.FilterPeriod#buildLogic(Object)
+	 */
 	public FilterPeriod(Object param){
 		super();
 		buildLogic(param);
 	}
 	
-	/* costruisce l'oggetto di tipo Predicate
-	 * @param param
+	/**
+	 * costruisce l'oggetto di tipo Predicate
+	 * @param rappresenta l'oggetto passato
+	 * @see msn.weather_app.model.RecordMeteo#getEpoch()
+	 * @see msn.weather_app.exception.FilterException#FilterException()
 	 */
 	
 	private void buildLogic(Object param) {

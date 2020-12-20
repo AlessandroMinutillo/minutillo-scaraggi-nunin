@@ -45,7 +45,7 @@ public class Temp {
 		this.felt = felt;
 	}
 	/**
-	 * @return cur
+	 * @return cur, la temperatura corrente
 	 */
 	public double getCur() {
 		return cur;
@@ -60,7 +60,7 @@ public class Temp {
 	}
 	
 	/**
-	 * @return min
+	 * @return min, la temperatura minima
 	 */
 	public double getMin() {
 		return min;
@@ -75,8 +75,7 @@ public class Temp {
 	}
 	
 	/**
-	 * restituisce la temperatura massima del giorno
-	 * @return max
+	 * @return max, la temperatura massima
 	 */
 	public double getMax() {
 		return max;
@@ -91,7 +90,7 @@ public class Temp {
 	}
 	
 	/**
-	 * @return felt
+	 * @return felt, la temperatura percepita
 	 */
 	public double getFelt() {
 		return felt;
