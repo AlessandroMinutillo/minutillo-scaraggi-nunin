@@ -1,13 +1,23 @@
 package msn.weather_app.util.filter;
 
+import msn.weather_app.exception.FilterException;
 import msn.weather_app.model.RecordMeteo;
+
+/* Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * seleziona tutti i RecordMeteo che corrispondono al periodo inserito come parametro di ricerca
+ */
 
 public class FilterPeriod extends Filter<RecordMeteo>{
 	
+	/* Enum che associa a ciascuna unità di tempo il corrispondente valore in secondi
+	 * 
+	 */
+	
 	private enum EpochValue {
-		DAY(86400.d),
-		WEEK(604800.d),
-		MONTH(18144000.d);
+		HOUR(3600.d),
+		DAY(24.d * HOUR.value),
+		WEEK(7.d * DAY.value),
+		MONTH(30.d * DAY.value);
 		
 		private double value;
 		private EpochValue(double value) {
@@ -15,15 +25,23 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 		}
 	}
 	
-	public FilterPeriod(Object param) {
+	public FilterPeriod(Object param){
 		super();
 		buildLogic(param);
 	}
+	
+	/* costruisce l'oggetto di tipo Predicate
+	 * @param param
+	 */
 	
 	private void buildLogic(Object param) {
 		String string = param.toString();
 		long now = System.currentTimeMillis()/1000; // epoch now
 		switch(string) {
+			case "hour":{
+				logic = rm -> rm.getEpoch() >= now - EpochValue.HOUR.value;
+			}
+			break;
 			case "day":{
 				logic = rm -> rm.getEpoch() >= now - EpochValue.DAY.value;
 			}
@@ -37,8 +55,27 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 			}
 			break;
 			default:{
-				Long d = Long.parseLong(string);
-				logic = rm-> rm.getEpoch() >= now - d * EpochValue.DAY.value;
+				try {
+					char c = string.charAt(0);
+					Long q = Long.parseLong(string.substring(1));
+					switch(c) {
+						case 'h': {
+							logic = rm-> rm.getEpoch() >= now - q * EpochValue.HOUR.value;
+						}
+						break;
+						case 'd': {
+							logic = rm-> rm.getEpoch() >= now - q * EpochValue.DAY.value;
+						}
+						break;
+						default:{
+							throw new FilterException();
+						}
+					}
+				}
+				catch(IndexOutOfBoundsException | NumberFormatException | FilterException e) {
+					System.out.println("Period filter error: invalid period\n" + e);
+					logic = rm -> true;
+				}
 			}
 		}
 	}

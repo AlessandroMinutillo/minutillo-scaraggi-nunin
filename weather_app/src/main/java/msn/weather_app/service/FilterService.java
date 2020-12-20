@@ -6,7 +6,16 @@ import java.util.stream.Collectors;
 
 import msn.weather_app.util.filter.Filter;
 
+/* Classe generica che applica un filtro a un ArrayList
+ * 
+ */
+
 public class FilterService<T> {
+	
+	/* applica un filtro a un ArrayList
+	 * @param filter
+	 * @param list
+	 */
 	
 	public ArrayList<T> applyFilter(Filter<T> filter, ArrayList<T> list){
 		List<T> result = list.stream()
