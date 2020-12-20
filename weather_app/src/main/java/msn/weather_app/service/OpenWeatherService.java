@@ -1,5 +1,11 @@
 package msn.weather_app.service;
-
+/**
+ * Implementazione della classe OpenWeatherService
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
 import java.io.BufferedReader;
 
 import java.io.IOException;
@@ -18,12 +24,12 @@ public class OpenWeatherService {
 	/**
 	 * Effettua una richiesta alle API di Openweather restituendo un RecordMeteo
 	 * contenente il meteo (attuale) di una coppia di coordinate geografiche valide
-	 * @param lat la latitudine geografica della città 
-	 * @param lon la longitudine geografica della città
-	 * @return l' oggetto RecordMeteo contenente il meteo attuale alle coordinate passate
+	 * @param lat indica la latitudine geografica della città 
+	 * @param lon indica la longitudine geografica della città
+	 * @return l'oggetto RecordMeteo contenente il meteo attuale alle coordinate passate
 	 * @throws CoordException
-	 * @see CoordException
-	 * @see RecordMeteo
+	 * @see msn.weather_app.exception.CoordException
+	 * @see msn.weather_app.model.RecordMeteo
 	 */
 	public static RecordMeteo APICall (String lat, String lon) throws CoordException {
 	
