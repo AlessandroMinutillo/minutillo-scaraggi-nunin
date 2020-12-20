@@ -100,7 +100,8 @@ public class DatabaseClass {
 	 * @see msn.weather_app.util.parser.ParserCity#load()
 	 */
 	public static void loadCityList() {
-		cityList = ParserCity.load();
+		ParserCity parser =new ParserCity();
+		cityList = parser.load();
 	}
 	/**
 	 * Carica la lista delle rilevazioni meteo dal file meteo.data.json
@@ -108,6 +109,7 @@ public class DatabaseClass {
 	 * @see msn.weather_app.util.parser.ParserMeteo#load()
 	 */
 	public static void loadMeteoData() {
-		meteoData = ParserMeteo.load();
+		ParserMeteo parser= new ParserMeteo();
+		meteoData = parser.load();
 	}
 }

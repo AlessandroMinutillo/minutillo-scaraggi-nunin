@@ -13,9 +13,9 @@ import msn.weather_app.model.City;
 import msn.weather_app.model.Coord;
 import msn.weather_app.model.Temp;
 
-public class ParserMeteo {
+public class ParserMeteo implements Parser<RecordMeteo>{
 	
-public static ArrayList<RecordMeteo> load() {
+public ArrayList<RecordMeteo> load() {
 		
 		ArrayList<RecordMeteo> meteoData = new ArrayList<RecordMeteo>();
 		

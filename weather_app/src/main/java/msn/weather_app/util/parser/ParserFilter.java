@@ -9,6 +9,7 @@ import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.util.filter.*;
 
 public class ParserFilter {
+
 	
 	public static Filter<RecordMeteo> getFilter(JSONObject top){
 		
