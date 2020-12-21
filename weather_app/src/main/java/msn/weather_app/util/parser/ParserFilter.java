@@ -20,8 +20,7 @@ public class ParserFilter {
 			
 			if(top.has("name")) {
 				String name = top.getString("name");
-				Filter<RecordMeteo> f = new FilterSubstrRM(name);
-				ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+				ComposedFilter.andCat(new FilterSubstrRM(name));
 			}
 			
 			if(top.has("coord")) {
@@ -29,14 +28,12 @@ public class ParserFilter {
 				double lat = obj.getDouble("lat");
 				double lon = obj.getDouble("lon");
 				Coord coord = new Coord(lat,lon);
-				Filter<RecordMeteo> f = new FilterCoord(coord);
-				ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+				ComposedFilter.andCat(new FilterCoord(coord));
 			}
 			
 			if(top.has("period")) {
-				Object period = top.get("period");
-				Filter<RecordMeteo> f = new FilterPeriod(period);
-				ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+				String period = top.getString("period");
+				ComposedFilter.andCat(new FilterPeriod(period));
 			}
 			
 			if(top.has("temp")) {
@@ -47,8 +44,7 @@ public class ParserFilter {
 					double from = cur.getDouble("from");
 					double to = cur.getDouble("to");
 					Range range = new Range(from,to);
-					Filter<RecordMeteo> f = new FilterTempCur(range);
-					ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+					ComposedFilter.andCat(new FilterTempCur(range));
 				}
 				
 				if(temp.has("min")) {
@@ -56,8 +52,7 @@ public class ParserFilter {
 					double from = min.getDouble("from");
 					double to = min.getDouble("to");
 					Range range = new Range(from,to);
-					Filter<RecordMeteo> f = new FilterTempMin(range);
-					ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+					ComposedFilter.andCat(new FilterTempMin(range));
 				}
 				
 				if(temp.has("max")) {
@@ -65,8 +60,7 @@ public class ParserFilter {
 					double from = max.getDouble("from");
 					double to = max.getDouble("to");
 					Range range = new Range(from,to);
-					Filter<RecordMeteo> f = new FilterTempMax(range);
-					ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+					ComposedFilter.andCat(new FilterTempMax(range));
 				}
 				
 				if(temp.has("felt")) {
@@ -74,8 +68,7 @@ public class ParserFilter {
 					double from = felt.getDouble("from");
 					double to = felt.getDouble("to");
 					Range range = new Range(from,to);
-					Filter<RecordMeteo> f = new FilterTempFelt(range);
-					ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+					ComposedFilter.andCat(new FilterTempFelt(range));
 				}
 			}
 			
@@ -84,8 +77,7 @@ public class ParserFilter {
 				double from = obj.getDouble("from");
 				double to = obj.getDouble("to");
 				Range range = new Range(from,to);
-				Filter<RecordMeteo> f = new FilterPress(range);
-				ComposedFilter.setLogic(ComposedFilter.getLogic().and(f.getLogic()));
+				ComposedFilter.andCat(new FilterPress(range));
 			}
 		}
 		catch(JSONException e) {

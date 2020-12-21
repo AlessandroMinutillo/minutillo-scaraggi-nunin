@@ -34,4 +34,22 @@ public class Filter<T>{
 		this.logic = logic;
 	}
 	
+	/**
+	 * Concatena due filtri in AND
+	 * @param filter rappresenta il secondo filtro
+	 */
+	
+	public void andCat(Filter<T> filter) {
+		this.logic = this.logic.and(filter.logic);
+	}
+	
+	/**
+	 * Concatena due filtri in OR
+	 * @param filter rappresenta il secondo filtro
+	 */
+	
+	public void orCat(Filter<T> filter) {
+		this.logic = this.logic.or(filter.logic);
+	}
+	
 }

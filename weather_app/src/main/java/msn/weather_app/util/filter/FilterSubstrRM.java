@@ -38,7 +38,11 @@ public class FilterSubstrRM extends Filter<RecordMeteo>{
 		String arr[] = string.split(";");
 		
 		logic = rm -> false;
-		for(String s: arr)
-			logic = logic.or(rm -> rm.getCity().getName().contains(s));
+		
+		for(String s: arr) {
+			Filter <RecordMeteo> filter = new Filter<RecordMeteo>();
+			filter.logic = rm -> rm.getCity().getName().contains(s);
+			this.orCat(filter);
+		}
 	}
 }
