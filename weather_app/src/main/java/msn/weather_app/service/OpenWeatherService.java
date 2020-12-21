@@ -7,7 +7,8 @@ package msn.weather_app.service;
  * @author Davide Nunin
  */
 import java.io.BufferedReader;
-
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -31,9 +32,22 @@ public class OpenWeatherService {
 	 * @see msn.weather_app.exception.CoordException
 	 * @see msn.weather_app.model.RecordMeteo
 	 */
+	private static void setUrl(String lat, String lon) {
+		try {
+		BufferedReader fin = new BufferedReader(new FileReader("config/configuration.json"));
+		String data = fin.readLine();			
+		fin.close();
+		JSONObject top =new JSONObject(data);
+		url=top.getString("site")+top.getString("unit");
+		url=url+"&lat="+lat+"&lon="+lon+"&appid="+top.getString("apikey");
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private static String url;
 	public static RecordMeteo APICall (String lat, String lon) throws CoordException {
 	
-		String url=new String ();
+	
 		JSONObject ret=new JSONObject();
 		String file = new String ();
 		RecordMeteo rec=new RecordMeteo();
@@ -46,9 +60,7 @@ public class OpenWeatherService {
 		if (!coord.validate()) {
 			throw new CoordException ("Wrong Coordinates");
 		}
-		
-		url="http://api.openweathermap.org/data/2.5/weather?units=metric&lat="+lat+"&lon="+lon+"&appid=";
-		url+="81678d8aee5508c1bcf509a2f142dbaa";
+		setUrl(lat,lon);
 		HttpURLConnection  connection = (HttpURLConnection) new URL (url).openConnection();
 		connection.setRequestMethod("GET");
 		connection.setConnectTimeout(5000);
