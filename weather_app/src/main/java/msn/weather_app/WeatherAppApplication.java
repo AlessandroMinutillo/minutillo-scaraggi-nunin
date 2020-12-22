@@ -8,10 +8,12 @@ package msn.weather_app;
  */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import msn.weather_app.database.DatabaseClass;
 
 @SpringBootApplication
+@EnableScheduling
 public class WeatherAppApplication {
 	/**
 	 * Carica i file di configurazione e avvia l'applicazione SpringBoot

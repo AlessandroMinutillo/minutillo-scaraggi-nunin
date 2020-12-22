@@ -1,4 +1,7 @@
 package msn.weather_app.model;
+
+import org.json.JSONObject;
+
 /**
  * Implementazione della classe RecordMeteo
  * 
@@ -109,5 +112,14 @@ public class RecordMeteo {
 	 */
 	public void setCity(City city) {
 		this.city = city;
+	}
+	public JSONObject toJSONObject() {
+		JSONObject ret =new JSONObject();
+		ret.put("epoch", this.epoch);
+		ret.put("press",this.press);
+		ret.put("temp", this.temp.toJSONObject());
+		ret.put("city",this.city.toJSONObject());
+		
+		return ret;
 	}
 }
