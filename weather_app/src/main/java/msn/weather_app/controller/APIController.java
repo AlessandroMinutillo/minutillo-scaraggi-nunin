@@ -9,6 +9,8 @@ package msn.weather_app.controller;
  */
 import java.util.ArrayList;
 
+
+
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.City;
 import msn.weather_app.model.RecordMeteo;

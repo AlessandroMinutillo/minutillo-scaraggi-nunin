@@ -36,8 +36,18 @@ public class FilterCoord extends Filter<RecordMeteo>{
 	 */
 	
 	private void buildLogic(Object param) {
-		Coord coord = (Coord) param;
-		logic = rm -> rm.getCity().getCoords().getLat() == coord.getLat() &&
+		try {
+			Coord coord = (Coord) param;
+			logic = rm -> rm.getCity().getCoords().getLat() == coord.getLat() &&
 					rm.getCity().getCoords().getLon() == coord.getLon();
+		}
+		catch(ClassCastException e) {
+			System.out.println("Coord filter error: invalide cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("Coord filter error: linkage error\n" + e);
+			logic = rm -> true;
+		}
 	}
 }

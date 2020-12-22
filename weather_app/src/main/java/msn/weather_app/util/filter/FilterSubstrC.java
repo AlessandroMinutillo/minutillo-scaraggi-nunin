@@ -31,7 +31,17 @@ public class FilterSubstrC extends Filter<City>{
 	 */
 	
 	private void buildLogic(Object param) {
-		String string = (String) param;
-		logic = c -> c.getName().contains(string);
+		try {
+			String string = (String) param;
+			logic = c -> c.getName().contains(string);
+		}
+		catch(ClassCastException e) {
+			System.out.println("SubstrC filter error: invalide cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("SubstrC filter error: linkage error\n" + e);
+			logic = rm -> true;
+		}
 	}
 }

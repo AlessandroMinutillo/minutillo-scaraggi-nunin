@@ -11,9 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.http.HttpConnectTimeoutException;
+import java.text.ParseException;
 
 import org.json.JSONObject;
 
@@ -77,6 +80,12 @@ public class OpenWeatherService {
 		 
 		}
 		catch(MalformedURLException e) {
+			e.printStackTrace();
+		}
+		catch (HttpConnectTimeoutException e) {
+			e.printStackTrace();
+		}
+		catch(ConnectException e) {
 			e.printStackTrace();
 		}
 		catch (IOException e) {

@@ -34,7 +34,17 @@ public class FilterTempFelt extends Filter<RecordMeteo>{
 	 */
 	
 	private void buildLogic(Object param) {
-		Range range = (Range) param;
-		logic = rm -> range.contains(rm.getTemp().getFelt());
+		try {
+			Range range = (Range) param;
+			logic = rm -> range.contains(rm.getTemp().getFelt());
+		}
+		catch(ClassCastException e) {
+			System.out.println("TempFelt filter error: invalide cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("TempFelt filter error: linkage error\n" + e);
+			logic = rm -> true;
+		}
 	}
 }

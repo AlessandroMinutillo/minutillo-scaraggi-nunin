@@ -1,8 +1,10 @@
 package msn.weather_app.util.parser;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -35,8 +37,14 @@ public ArrayList<RecordMeteo> load() {
 				meteoData.add(meteo);
 			}
 		}
+		catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (StreamCorruptedException e) {
+			e.printStackTrace();
+		}
 		catch(IOException e) {
-			System.out.println("Eccezione I/O\n" + e);
+			System.out.println("I/O exception\n" + e);
 		}
 		
 		return meteoData;

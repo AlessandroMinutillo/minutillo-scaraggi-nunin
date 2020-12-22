@@ -34,7 +34,17 @@ public class FilterTempMin extends Filter<RecordMeteo>{
 	 */
 	
 	private void buildLogic(Object param) {
-		Range range = (Range) param;
-		logic = rm -> range.contains(rm.getTemp().getMin());
+		try {
+			Range range = (Range) param;
+			logic = rm -> range.contains(rm.getTemp().getMin());
+		}
+		catch(ClassCastException e) {
+			System.out.println("TempMin filter error: invalide cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("TempMin filter error: linkage error\n" + e);
+			logic = rm -> true;
+		}
 	}
 }

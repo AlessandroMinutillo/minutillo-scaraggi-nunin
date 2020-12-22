@@ -35,8 +35,18 @@ public class FilterTempCur extends Filter<RecordMeteo>{
 	 */
 	
 	private void buildLogic(Object param) {
-		Range range = (Range) param;
-		logic = rm -> range.contains(rm.getTemp().getCur());
+		try {
+			Range range = (Range) param;
+			logic = rm -> range.contains(rm.getTemp().getCur());
+		}
+		catch(ClassCastException e) {
+			System.out.println("TempCur filter error: invalide cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("TempCur filter error: linkage error\n" + e);
+			logic = rm -> true;
+		}
 	}
 	
 }

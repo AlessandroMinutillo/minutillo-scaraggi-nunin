@@ -2,6 +2,7 @@ package msn.weather_app.util.filter;
 
 /**
  * Implementazione della classe FilterSubstrRM
+
  *  
  * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
  * seleziona tutti i RecordMeteo in cui il nome della città contiene la
@@ -34,15 +35,25 @@ public class FilterSubstrRM extends Filter<RecordMeteo>{
 	 */
 	
 	private void buildLogic(Object param) {
-		String string = (String) param;
-		String arr[] = string.split(";");
-		
-		logic = rm -> false;
-		
-		for(String s: arr) {
-			Filter <RecordMeteo> filter = new Filter<RecordMeteo>();
-			filter.logic = rm -> rm.getCity().getName().contains(s);
-			this.orCat(filter);
+		try {
+			String string = (String) param;
+			String arr[] = string.split(";");
+			
+			logic = rm -> false;
+			
+			for(String s: arr) {
+				Filter <RecordMeteo> filter = new Filter<RecordMeteo>();
+				filter.logic = rm -> rm.getCity().getName().contains(s);
+				this.orCat(filter);
+			}
+		}
+		catch(ClassCastException e) {
+			System.out.println("Coord filter error: invalid cast\n" + e);
+			logic = rm -> true;
+		}
+		catch(LinkageError e) {
+			System.out.println("Coord filter error: linkage error\n" + e);
+			logic = rm -> true;
 		}
 	}
 }

@@ -7,8 +7,10 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
 public class ParserCity implements Parser<City>{
@@ -33,8 +35,14 @@ public class ParserCity implements Parser<City>{
 				cityList.add(city);
 			}
 		}
+		catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (StreamCorruptedException e) {
+			e.printStackTrace();
+		}
 		catch(IOException e) {
-			System.out.println("Eccezione I/O\n" + e);
+			System.out.println("I/O exception\n" + e);
 		}
 		
 		return cityList;
