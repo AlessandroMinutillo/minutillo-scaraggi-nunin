@@ -8,8 +8,7 @@ package msn.weather_app.controller;
  * @author Davide Nunin
  */
 import java.util.ArrayList;
-
-
+import java.util.HashMap;
 
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.City;
@@ -17,6 +16,8 @@ import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.service.OpenWeatherService;
 import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.parser.ParserFilter;
+import msn.weather_app.util.stats.Stats;
+import msn.weather_app.util.stats.StatsCalculator;
 import msn.weather_app.database.DatabaseClass;
 import msn.weather_app.exception.CoordException;
 
@@ -101,5 +102,39 @@ public class APIController {
 	public RecordMeteo getMeteoNow(@RequestParam(name="lat",defaultValue = "0")String lat ,@RequestParam(name="lon",defaultValue = "0") String lon) throws CoordException {
 	
 		return OpenWeatherService.APICall(lat,lon);
+	}
+	
+	/**
+	 * Metodo GET per visualizzare le statistiche su tutti i dati meteo disponibili
+	 * @return le statistiche su tutti i dati meteo disponibili
+	 * @see msn.weather_app.stats.StatsCalculator#calc(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.database.DatabaseClass#getMeteoData()
+	 */
+	
+	@GetMapping("/stats")
+	public HashMap<String,Double> getStats(){
+			ArrayList<RecordMeteo> sample = DatabaseClass.getMeteoData();
+			return StatsCalculator.calc(sample).getStat();
+	}
+	
+	/**
+	 * Metodo POST per visualizzare le statistiche sui dati meteo filtrati
+	 * @param body rappresenta la struttura del filtro da introdurre
+	 * @return le statistiche sui dati meteo filtrati
+	 * @see msn.weather_app.stats.StatsCalculator#calc(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
+	 */
+	
+	@PostMapping("/stats/filtered")
+	public HashMap<String,Double> getStatsFiltered(@RequestBody String body){
+		try {
+			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
+			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
+			return StatsCalculator.calc(sample).getStat();
+		}
+		catch(JSONException e) {
+			System.out.println("Malformed JSONObject: returning empty stats\n" + e);
+			return new Stats().getStat();
+		}
 	}
 }
