@@ -1,4 +1,7 @@
 package msn.weather_app.database;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
  * Implementazione della classe DatabaseClass
  * 
@@ -9,6 +12,8 @@ package msn.weather_app.database;
  * @author Davide Nunin
  */
 import java.util.ArrayList;
+
+import org.json.JSONArray;
 
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.RecordMeteo;
@@ -112,4 +117,25 @@ public class DatabaseClass {
 		ParserMeteo parser= new ParserMeteo();
 		meteoData = parser.load();
 	}
+	public static void updateMeteoData(ArrayList<RecordMeteo> data) {
+		for( RecordMeteo element: data) {
+			meteoData.add(element);
+		}
+	}
+	public static void save() {
+		try {
+			BufferedWriter out =new BufferedWriter (new FileWriter("config/meteo.data.json")) ;
+			JSONArray newarray = new JSONArray();
+			
+			for(RecordMeteo element :meteoData) {
+				newarray.put(element.toJSONObject()); 
+			}
+			out.write(newarray.toString());
+			out.close();
+		}catch(IOException e) {
+			
+		}
+	}
+	
+	
 }

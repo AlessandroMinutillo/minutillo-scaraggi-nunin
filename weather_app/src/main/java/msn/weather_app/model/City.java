@@ -1,5 +1,8 @@
 package msn.weather_app.model;
-	/**
+
+import org.json.JSONObject;
+
+/**
 	 * Implementazione della classe City
 	 * 
 	 * Rappresenta una città
@@ -55,5 +58,10 @@ public class City {
 	public void setCoords(Coord coords) {
 		this.coords = coords;
 	}
-	
+	public JSONObject toJSONObject() {
+		JSONObject ret =new JSONObject();
+		ret.put("name", this.name);
+		ret.put("coord", this.coords.toJSONObject());
+		return ret;
+	}
 }

@@ -8,6 +8,10 @@ package msn.weather_app.model;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Coord {
 	/**
 	 * Rappresenta la latitudine
@@ -68,5 +72,11 @@ public class Coord {
 	 */
 	public String toString () {
 		return lat+" "+lon;
+	}
+	public JSONObject toJSONObject() {
+		JSONObject ret =new JSONObject();
+		ret.put("lat", this.lat);
+		ret.put("lon", this.lon);
+		return ret;
 	}
 }
