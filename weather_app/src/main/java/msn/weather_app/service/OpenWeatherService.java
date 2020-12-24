@@ -60,9 +60,7 @@ public class OpenWeatherService {
 		double latitudine=Double.parseDouble(lat);
 		double longitudine=Double.parseDouble(lon);
 		Coord coord = new Coord(latitudine, longitudine);
-		if (!coord.validate()) {
-			throw new CoordException ("Wrong Coordinates");
-		}
+		coord.validate();
 		setUrl(lat,lon);
 		HttpURLConnection  connection = (HttpURLConnection) new URL (url).openConnection();
 		connection.setRequestMethod("GET");
