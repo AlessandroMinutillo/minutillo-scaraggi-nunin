@@ -16,14 +16,22 @@ import msn.weather_app.model.RecordMeteo;
 
 @Component
 public class Scheduler {
-	@Scheduled(fixedRate =3600000 )
-	
-	
-	public static void update() {
+	private static void readSample() {
 		try {
 		BufferedReader fin = new BufferedReader(new FileReader("config/CitiesToSample.json"));
-		String text= fin.readLine();
+		text= fin.readLine();
 		fin.close();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+		private static String text;
+	@Scheduled(fixedRate =3600000 )
+	public static void update() {
+		try {
+		readSample();
 		JSONArray top =new JSONArray(text);
 		ArrayList<Coord> cities= new ArrayList<Coord>();
 		for(int i=0;i<top.length();i++) {
@@ -37,10 +45,8 @@ public class Scheduler {
 		DatabaseClass.updateMeteoData(data);
 		DatabaseClass.save();		
 		
-		}catch (IOException e) {
-			e.printStackTrace();
 		}catch(CoordException e) {
-			System.out.println("wrong coordinates in file CitiesToSample");
+			System.out.println("Wrong coordinates");
 		}
 	}
 	
