@@ -31,12 +31,16 @@ public class StatsCalculator {
 		try {
 			double n = sample.size();
 			if(n == 0) throw new SampleException();
-			double sumTempCur, sumTempFelt, sumPress, tempMin, tempMax;
+			double sumTempCur, sumTempFelt, sumPress;
+			double tempMin, tempMax;
+			double pressMin, pressMax;
 			
 			sumTempCur = sumTempFelt = sumPress = 0.d;
 			
 			tempMax = -100.d;
 			tempMin = 100.d;
+			pressMax = 0.d;
+			pressMin = 2000.d;
 			
 			for(RecordMeteo rm : sample) {
 				sumTempCur += rm.getTemp().getCur();
@@ -44,6 +48,8 @@ public class StatsCalculator {
 				sumPress += rm.getPress();
 				tempMax = Math.max(tempMax, rm.getTemp().getMax());
 				tempMin = Math.min(tempMin, rm.getTemp().getMin());
+				pressMax = Math.max(pressMax, rm.getPress());
+				pressMin = Math.min(pressMin, rm.getPress());
 			}
 			
 			double tempCurAvg = sumTempCur/n;
@@ -66,6 +72,8 @@ public class StatsCalculator {
 			
 			stat.addField("tempMin",tempMin);
 			stat.addField("tempMax",tempMax);
+			stat.addField("pressMin",pressMin);
+			stat.addField("pressMax",pressMax);
 			stat.addField("tempCurAvg", tempCurAvg);
 			stat.addField("tempFeltAvg", tempFeltAvg);
 			stat.addField("pressAvg", pressAvg);
