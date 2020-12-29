@@ -14,7 +14,6 @@ public class ParserFilter {
 	public static Filter<RecordMeteo> getFilter(JSONObject top){
 		
 		Filter<RecordMeteo> ComposedFilter = new Filter<RecordMeteo>();
-		ComposedFilter.setLogic(rm -> true);
 		
 		try {
 			

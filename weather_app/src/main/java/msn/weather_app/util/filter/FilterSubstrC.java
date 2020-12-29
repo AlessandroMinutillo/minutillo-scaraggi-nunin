@@ -37,11 +37,9 @@ public class FilterSubstrC extends Filter<City>{
 		}
 		catch(ClassCastException e) {
 			System.out.println("SubstrC filter error: invalide cast\n" + e);
-			logic = rm -> true;
 		}
 		catch(LinkageError e) {
 			System.out.println("SubstrC filter error: linkage error\n" + e);
-			logic = rm -> true;
 		}
 	}
 }

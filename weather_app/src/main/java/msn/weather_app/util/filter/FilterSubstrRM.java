@@ -49,11 +49,9 @@ public class FilterSubstrRM extends Filter<RecordMeteo>{
 		}
 		catch(ClassCastException e) {
 			System.out.println("Coord filter error: invalid cast\n" + e);
-			logic = rm -> true;
 		}
 		catch(LinkageError e) {
 			System.out.println("Coord filter error: linkage error\n" + e);
-			logic = rm -> true;
 		}
 	}
 }

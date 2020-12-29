@@ -16,8 +16,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.http.HttpConnectTimeoutException;
-import java.text.ParseException;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import msn.weather_app.model.Coord;
@@ -37,14 +37,21 @@ public class OpenWeatherService {
 	 */
 	private static void setUrl(String lat, String lon) {
 		try {
-		BufferedReader fin = new BufferedReader(new FileReader("config/configuration.json"));
-		String data = fin.readLine();			
-		fin.close();
-		JSONObject top =new JSONObject(data);
-		url=top.getString("site")+top.getString("unit");
-		url=url+"&lat="+lat+"&lon="+lon+"&appid="+top.getString("apikey");
-		}catch(IOException e) {
-			e.printStackTrace();
+			BufferedReader fin = new BufferedReader(new FileReader("config/configuration.json"));
+			String data = fin.readLine();			
+			fin.close();
+			JSONObject top =new JSONObject(data);
+			url=top.getString("site")+top.getString("unit");
+			url=url+"&lat="+lat+"&lon="+lon+"&appid="+top.getString("apikey");
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("File not found\n" + e);
+		}
+		catch(IOException e) {
+			System.out.println("I/O error\n" + e);
+		}
+		catch(JSONException e) {
+			System.out.println("Malformed JSON\n" + e);
 		}
 	}
 	private static String url;
@@ -60,9 +67,7 @@ public class OpenWeatherService {
 		double latitudine=Double.parseDouble(lat);
 		double longitudine=Double.parseDouble(lon);
 		Coord coord = new Coord(latitudine, longitudine);
-		if (!coord.validate()) {
-			throw new CoordException ("Wrong Coordinates");
-		}
+		coord.validate();
 		setUrl(lat,lon);
 		HttpURLConnection  connection = (HttpURLConnection) new URL (url).openConnection();
 		connection.setRequestMethod("GET");
@@ -89,10 +94,10 @@ public class OpenWeatherService {
 			e.printStackTrace();
 		}
 		catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("I/O error\n" + e);
 		}
 		catch (CoordException e) {
-			e.printStackTrace();
+			System.out.println("Wrong coordinates\n" + e);
 		}
 		return rec;
 	}

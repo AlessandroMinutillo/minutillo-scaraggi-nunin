@@ -10,9 +10,9 @@ package msn.weather_app.model;
  */
 public class Metadata {
 
-	String alias;
-	String sourceField;
-	String type;
+	private String alias;
+	private String sourceField;
+	private String type;
 	
 	/**
 	 * @param alias

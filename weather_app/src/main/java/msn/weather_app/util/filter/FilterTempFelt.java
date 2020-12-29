@@ -40,11 +40,9 @@ public class FilterTempFelt extends Filter<RecordMeteo>{
 		}
 		catch(ClassCastException e) {
 			System.out.println("TempFelt filter error: invalide cast\n" + e);
-			logic = rm -> true;
 		}
 		catch(LinkageError e) {
 			System.out.println("TempFelt filter error: linkage error\n" + e);
-			logic = rm -> true;
 		}
 	}
 }

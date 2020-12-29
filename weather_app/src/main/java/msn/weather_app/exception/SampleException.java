@@ -2,6 +2,10 @@ package msn.weather_app.exception;
 
 public class SampleException extends Exception{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Costruttore
 	 */
 	public SampleException () {

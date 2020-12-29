@@ -96,11 +96,9 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 				}
 				catch(EnumConstantNotPresentException | IndexOutOfBoundsException | NumberFormatException | FilterException e) {
 					System.out.println("Period filter error: invalid period\n" + e);
-					logic = rm -> true;
 				}
 				catch(LinkageError e) {
 					System.out.println("Period filter error: linkage error\n" + e);
-					logic = rm -> true;
 				}
 			}
 		}

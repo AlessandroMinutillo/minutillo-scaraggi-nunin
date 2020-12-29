@@ -19,7 +19,9 @@ public class Filter<T>{
 	/**
 	 * Costruttore
 	 */
-	public Filter() {}
+	public Filter() {
+		buildLogic();
+	}
 	/**
 	 * @return il predicato
 	 */
@@ -33,7 +35,6 @@ public class Filter<T>{
 	public void setLogic(Predicate <T> logic){
 		this.logic = logic;
 	}
-	
 	/**
 	 * Concatena due filtri in AND
 	 * @param filter rappresenta il secondo filtro
@@ -50,6 +51,13 @@ public class Filter<T>{
 	
 	public void orCat(Filter<T> filter) {
 		this.logic = this.logic.or(filter.logic);
+	}
+	
+	/**
+	 * Costruisce l'oggetto di tipo Predicate
+	*/
+	private void buildLogic() {
+		logic = rm->true;
 	}
 	
 }

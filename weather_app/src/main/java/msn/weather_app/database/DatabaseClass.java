@@ -40,24 +40,37 @@ public class DatabaseClass {
 	 */
 	private static ArrayList<RecordMeteo> meteoData = new ArrayList<RecordMeteo>();
 	/**
-	 * Viene costruito il nostro ArrayList metadata
+	 * costruisce l'ArrayList metadata
 	 * @return metadata stesso
 	 * @see msn.weather_app.model.Metadata
 	 */
 	public static ArrayList<Metadata> getMetadata(){
-		metadata.add(new Metadata("CityName","Nome della citta'","String"));
-		metadata.add(new Metadata("Lat","Latitudine","Double"));
-		metadata.add(new Metadata("Lon","Longitudine","Double"));
-		metadata.add(new Metadata("TempAtt","Temperatura attuale (°C)","Double"));
-		metadata.add(new Metadata("PressAtt","Pressione attuale (hPa)","Double"));
-		metadata.add(new Metadata("TempMin","Temperatura minima (°C)","Double"));
-		metadata.add(new Metadata("TempMax","Temperatura massima (°C)","Double"));
-		metadata.add(new Metadata("PressMin","Pressione minima (hPa)","Double"));
-		metadata.add(new Metadata("PressMax","Pressione massima (hPa)","Double"));
-		metadata.add(new Metadata("TempMedia","Media della temperatura (°C)","Double"));
-		metadata.add(new Metadata("TempVar","Varianza della temperatura (°C)","Double"));
-		metadata.add(new Metadata("PressMedia","Media della pressione (hPa)","Double"));
-		metadata.add(new Metadata("PressVar","Varianza della pressione (hPa)","Double"));
+		
+		metadata.add(new Metadata("city","Città","City"));
+		metadata.add(new Metadata("name","Nome della città","String"));
+		metadata.add(new Metadata("coord","Coordinate della città","Coord"));
+		metadata.add(new Metadata("lat","Latitudine","Double"));
+		metadata.add(new Metadata("lon","Longitudine","Double"));
+		metadata.add(new Metadata("epoch","Data in formato UNIX","Long"));
+		metadata.add(new Metadata("temp","Temperatura","Temp"));
+		metadata.add(new Metadata("cur","Temperatura attuale (°C)","Double"));
+		metadata.add(new Metadata("min","Temperatura attuale minima (°C)","Double"));
+		metadata.add(new Metadata("max","Temperatura attuale massima (°C)","Double"));
+		metadata.add(new Metadata("felt","Temperatura attuale percepita (°C)","Double"));
+		metadata.add(new Metadata("press","Pressione attuale (hPa)","Double"));
+		
+		metadata.add(new Metadata("tempMin","Temperatura minima (°C)","Double"));
+		metadata.add(new Metadata("tempMax","Temperatura massima (°C)","Double"));
+		metadata.add(new Metadata("tempCurAvg","Media temperatura (°C)","Double"));
+		metadata.add(new Metadata("tempFeltAvg","Media temperatura percepita (°C)","Double"));
+		metadata.add(new Metadata("tempCurVar","Varianza temperatura","Double"));
+		metadata.add(new Metadata("tempFeltVar","Varianza temperatura percepita","Double"));
+		
+		metadata.add(new Metadata("pressMin","Pressione minima (hPa)","Double"));
+		metadata.add(new Metadata("pressMax","Pressione massima (hPa)","Double"));
+		metadata.add(new Metadata("pressMedia","Media della pressione (hPa)","Double"));
+		metadata.add(new Metadata("pressVar","Varianza della pressione","Double"));
+		
 		return metadata;
 	}
 	/**
@@ -118,9 +131,7 @@ public class DatabaseClass {
 		meteoData = parser.load();
 	}
 	public static void updateMeteoData(ArrayList<RecordMeteo> data) {
-		for( RecordMeteo element: data) {
-			meteoData.add(element);
-		}
+			meteoData.addAll(data);
 	}
 	public static void save() {
 		try {
@@ -133,7 +144,7 @@ public class DatabaseClass {
 			out.write(newarray.toString());
 			out.close();
 		}catch(IOException e) {
-			
+			System.out.println("I/O error\n" + e);
 		}
 	}
 	

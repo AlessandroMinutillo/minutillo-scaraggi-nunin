@@ -40,11 +40,9 @@ public class FilterTempMin extends Filter<RecordMeteo>{
 		}
 		catch(ClassCastException e) {
 			System.out.println("TempMin filter error: invalide cast\n" + e);
-			logic = rm -> true;
 		}
 		catch(LinkageError e) {
 			System.out.println("TempMin filter error: linkage error\n" + e);
-			logic = rm -> true;
 		}
 	}
 }

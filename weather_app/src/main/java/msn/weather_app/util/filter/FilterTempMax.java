@@ -39,11 +39,9 @@ public class FilterTempMax extends Filter<RecordMeteo>{
 		}
 		catch(ClassCastException e) {
 			System.out.println("TempMax filter error: invalide cast\n" + e);
-			logic = rm -> true;
 		}
 		catch(LinkageError e) {
 			System.out.println("TempMax filter error: linkage error\n" + e);
-			logic = rm -> true;
 		}
 	}
 	

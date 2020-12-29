@@ -11,6 +11,10 @@ package msn.weather_app.exception;
 
 public class FilterException extends Exception{
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Costruttore
 	 */
 	public FilterException () {

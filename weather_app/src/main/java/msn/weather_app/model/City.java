@@ -20,15 +20,15 @@ public class City {
 	 * Coordinate della città
 	 * @see msn.weather_app.model.Coord
 	 */
-	private Coord coords;
+	private Coord coord;
 	/**
 	 * Costruttore
 	 * @param name rappresenta il nome della città
 	 * @param coords rappresenta le coordinate geografiche della città
 	 */
-	public City(String name, Coord coords) {
+	public City(String name, Coord coord) {
 		this.name = name;
-		this.coords = coords;
+		this.coord = coord;
 	}
 	/**
 	 * @return il nome della città
@@ -47,21 +47,22 @@ public class City {
 	 * @return le coordinate della città
 	 * @see msn.weather_app.model.Coord
 	 */
-	public Coord getCoords() {
-		return coords;
+	public Coord getCoord() {
+		return coord;
 	}
 	/**
 	 * Imposta le coordinate della città
 	 * @param coords indica le coordinate da impostare
 	 * @see msn.weather_app.model.Coord
 	 */
-	public void setCoords(Coord coords) {
-		this.coords = coords;
+	public void setCoord(Coord coord) {
+		this.coord = coord;
 	}
+	
 	public JSONObject toJSONObject() {
 		JSONObject ret =new JSONObject();
 		ret.put("name", this.name);
-		ret.put("coord", this.coords.toJSONObject());
+		ret.put("coord", this.coord.toJSONObject());
 		return ret;
 	}
 }

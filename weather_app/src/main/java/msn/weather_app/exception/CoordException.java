@@ -10,6 +10,25 @@ package msn.weather_app.exception;
  */
 
 public class CoordException extends Exception{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Costruttore
+	 */
+	
+	public CoordException () {
+		super();
+	}
+	
+	/**
+	 * Costruttore
+	 * @param msg rappresenta il messaggio di errore
+	 */
+	
 	public CoordException (String msg) {
 		super(msg);
 	}

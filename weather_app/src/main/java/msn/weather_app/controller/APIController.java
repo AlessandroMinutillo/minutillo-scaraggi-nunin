@@ -14,6 +14,7 @@ import msn.weather_app.model.Metadata;
 import msn.weather_app.model.City;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.service.OpenWeatherService;
+import msn.weather_app.service.Scheduler;
 import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.parser.ParserFilter;
 import msn.weather_app.util.stats.Stats;
@@ -41,19 +42,34 @@ public class APIController {
 		return DatabaseClass.getMetadata();
 	}
 	/**
-	 * Metodo GET per la visualizzazione del file di configurazione
+	 * Metodo GET per la visualizzazione di ArrayList<City> cityList
 	 * @return il file di configurazione in formato JSON
 	 * @see msn.weather_app.database.DatabaseClass#getCityList()
-	 */
+	*/
+	
 	@GetMapping("/data/city")
 	public ArrayList<City> getAllCities(){
 		return DatabaseClass.getCityList();
-	}
+	} 
+	
 	/**
-	 * Metodo GET per la visualizzazione dell'arraylist di recordMeteo
+	 * Metodo GET per la visualizzazione del file di configurazione CitiesToSample.json
+	 * @return il file di configurazione in formato JSON
+	 * @see msn.weather_app.service.Scheduler#readSample()
+	*/
+	
+	
+	@GetMapping("/data/sampled")
+	public ArrayList<City> getSampled(){
+		return Scheduler.readSample();
+	} 
+	
+	/**
+	 * Metodo GET per la visualizzazione di ArrayList<RecordMeteo> meteoData 
 	 * @return il record MeteoData
 	 * @see msn.weather_app.database.DatabaseClass#getMeteoData()
 	 */
+	
 	@GetMapping("/data/meteo")
 	public ArrayList<RecordMeteo> getMeteo(){
 		return DatabaseClass.getMeteoData();
@@ -105,32 +121,40 @@ public class APIController {
 	}
 	
 	/**
-	 * Metodo GET per visualizzare le statistiche su tutti i dati meteo disponibili
-	 * @return le statistiche su tutti i dati meteo disponibili
-	 * @see msn.weather_app.stats.StatsCalculator#calc(ArrayList<RecordMeteo>)
-	 * @see msn.weather_app.database.DatabaseClass#getMeteoData()
-	 */
-	
-	@GetMapping("/stats")
-	public HashMap<String,Double> getStats(){
-			ArrayList<RecordMeteo> sample = DatabaseClass.getMeteoData();
-			return StatsCalculator.calc(sample).getStat();
-	}
-	
-	/**
-	 * Metodo POST per visualizzare le statistiche sui dati meteo filtrati
+	 * Metodo POST per visualizzare le statistiche sulla temperatura dei dati meteo filtrati
 	 * @param body rappresenta la struttura del filtro da introdurre
 	 * @return le statistiche sui dati meteo filtrati
-	 * @see msn.weather_app.stats.StatsCalculator#calc(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.stats.StatsCalculator#calcTemp(ArrayList<RecordMeteo>)
 	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
 	 */
 	
-	@PostMapping("/stats/filtered")
-	public HashMap<String,Double> getStatsFiltered(@RequestBody String body){
+	@PostMapping("/stats/temp")
+	public HashMap<String,Double> getStatsTempFiltered(@RequestBody String body){
 		try {
 			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
 			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
-			return StatsCalculator.calc(sample).getStat();
+			return StatsCalculator.calcTemp(sample).getStat();
+		}
+		catch(JSONException e) {
+			System.out.println("Malformed JSONObject: returning empty stats\n" + e);
+			return new Stats().getStat();
+		}
+	}
+	
+	/**
+	 * Metodo POST per visualizzare le statistiche sulla pressione dei dati meteo filtrati
+	 * @param body rappresenta la struttura del filtro da introdurre
+	 * @return le statistiche sui dati meteo filtrati
+	 * @see msn.weather_app.stats.StatsCalculator#calcPress(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
+	 */
+	
+	@PostMapping("/stats/press")
+	public HashMap<String,Double> getStatsPressFiltered(@RequestBody String body){
+		try {
+			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
+			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
+			return StatsCalculator.calcPress(sample).getStat();
 		}
 		catch(JSONException e) {
 			System.out.println("Malformed JSONObject: returning empty stats\n" + e);

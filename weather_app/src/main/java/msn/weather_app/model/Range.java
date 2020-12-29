@@ -14,7 +14,7 @@ public class Range{
 	 * from e to rappresentano rispettivamente il primo e il secondo
 	 * estremo di un determinato intervallo (range)
 	 */
-	double from, to;
+	private double from, to;
 	/**
 	 * Costruttore
 	 * @param from indica il primo estremo dell'intervallo

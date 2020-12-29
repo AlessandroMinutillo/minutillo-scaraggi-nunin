@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.json.JSONException;
-
-import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.util.filter.Filter;
 
 public class FilterService<T> {
