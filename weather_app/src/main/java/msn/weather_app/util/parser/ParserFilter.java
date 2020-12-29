@@ -7,9 +7,20 @@ import msn.weather_app.model.Coord;
 import msn.weather_app.model.Range;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.util.filter.*;
-
+/**Costruisce un filtro a partire dal body della richiesta http ricevuta
+ * 
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ *
+ */
 public class ParserFilter {
-
+	/**
+	 * Restituisce un filtro a partire dal JSONObject top passatogli
+	 * @param top
+	 * @return ComposedFilter
+	 */
 	
 	public static Filter<RecordMeteo> getFilter(JSONObject top){
 		

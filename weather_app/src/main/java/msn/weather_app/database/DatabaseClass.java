@@ -10,6 +10,7 @@ import java.io.IOException;
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
  * @author Davide Nunin
+ * 
  */
 import java.util.ArrayList;
 
@@ -130,9 +131,19 @@ public class DatabaseClass {
 		ParserMeteo parser= new ParserMeteo();
 		meteoData = parser.load();
 	}
+	/**
+	 *aggiunge i dati contenuti nell' ArrayList data a meteoData
+	 *
+	 * @param data
+	 */
 	public static void updateMeteoData(ArrayList<RecordMeteo> data) {
 			meteoData.addAll(data);
 	}
+	/**
+	 * Salva i dati contenuti nell' ArrayList meteoData nel file meteo.data.json in formato JSON
+	 * @throws IOException 
+	 * 
+	 */
 	public static void save() {
 		try {
 			BufferedWriter out =new BufferedWriter (new FileWriter("config/meteo.data.json")) ;

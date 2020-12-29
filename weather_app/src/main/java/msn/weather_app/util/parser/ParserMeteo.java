@@ -15,17 +15,28 @@ import msn.weather_app.model.City;
 import msn.weather_app.model.Coord;
 import msn.weather_app.model.Temp;
 
+/**
+ * Contiene i metodi usati per il parsing del file meteo.data.json
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
 public class ParserMeteo implements Parser<RecordMeteo>{
 	
+	/**
+	 * Restituisce l' ArrayList contenente i dati del file meteo.data.json
+	 * @return meteoData
+	 * @throws IOException, FileNotFoundException, StreamCorruptedException
+	 */
 public ArrayList<RecordMeteo> load() {
 		
 		ArrayList<RecordMeteo> meteoData = new ArrayList<RecordMeteo>();
 		
 		try {
 			
-			//Scanner fin = new Scanner (new BufferedReader(new FileReader("config/city.list.min.json")));
+			
 			BufferedReader fin = new BufferedReader(new FileReader("config/meteo.data.json"));
-			//String data = fin.nextLine();
 			String data = fin.readLine();
 			
 			fin.close();
@@ -49,7 +60,11 @@ public ArrayList<RecordMeteo> load() {
 		
 		return meteoData;
 	}
-	
+	/**
+	 * Costruisce un oggetto di tipo RecordMeteo a partire da un JSONObject
+	 * @param top
+	 * @return RecordMeteo
+	 */
 	private static RecordMeteo mkRecordMeteo(JSONObject top) {
 		
 		long epoch = top.getLong("epoch");
@@ -66,7 +81,10 @@ public ArrayList<RecordMeteo> load() {
 		
 		return new RecordMeteo(temp,press,epoch,city);
 	}
-	
+	/**
+	 * Converte un JSONObject in RecordMeteo
+	 * @return res
+	 */
 	public static RecordMeteo JSONtoMeteo(JSONObject obj){
 		JSONObject main =obj.getJSONObject("main");
 		JSONObject coord= obj.getJSONObject("coord");

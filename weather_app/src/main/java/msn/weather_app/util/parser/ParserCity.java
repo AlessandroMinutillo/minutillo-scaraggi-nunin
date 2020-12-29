@@ -12,18 +12,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
-
+/**
+ * Classe contenente tutti i metodi per il parsing del file city.list.min.json
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ * 
+ */
 public class ParserCity implements Parser<City>{
-	
+	/**
+	 * Legge i dati contenuti in city.list.min.json , e li restituisce sotto forma di ArrayList<City>
+	 * @return cityList
+	 * @throws FileNotFoundException, IoException, StreamCorruptedException
+	 */
 	public  ArrayList<City> load() {
 		
 		ArrayList<City> cityList = new ArrayList<City>();
 		
 		try {
 			
-			//Scanner fin = new Scanner (new BufferedReader(new FileReader("config/city.list.min.json")));
 			BufferedReader fin = new BufferedReader(new FileReader("config/city.list.min.json"));
-			//String data = fin.nextLine();
 			String data = fin.readLine();			
 			fin.close();
 			
@@ -47,7 +55,11 @@ public class ParserCity implements Parser<City>{
 		
 		return cityList;
 	}
-	
+	/**
+	 * Costruisce un oggetto di tipo city a partire da un JSONObject 
+	 * @param top
+	 * @return city
+	 */
 	private static City mkCity(JSONObject top) {
 		JSONObject obj = top.getJSONObject("coord");
 		Coord coord = new Coord(obj.getDouble("lat"), obj.getDouble("lon"));

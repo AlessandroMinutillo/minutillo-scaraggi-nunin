@@ -18,7 +18,12 @@ import msn.weather_app.model.RecordMeteo;
 
 @Component
 public class Scheduler {
-	
+	/**
+	 * 
+	 * @return cities un ArrayList di città contenute nel file CitiesToSample.json
+	 * @throws IOException, FileNotFoundException
+	 *
+	 */
 	public static ArrayList<City> readSample() {
 		String text = "";
 		try {
@@ -42,7 +47,9 @@ public class Scheduler {
 		return cities;
 	}
 	
-	
+	/**Aggiorna ad intervalli di un' ora il file meteo.data.json
+	 * @throws CoordException
+	 */
 	@Scheduled(fixedRate =3600000 )
 	public static void update() {
 		try {
