@@ -11,26 +11,12 @@ package msn.weather_app.util.filter;
  * @author Davide Nunin
  */
 import msn.weather_app.exception.FilterException;
+import msn.weather_app.model.TimeData;
+import msn.weather_app.model.EpochValue;
 import msn.weather_app.model.RecordMeteo;
 
 
 public class FilterPeriod extends Filter<RecordMeteo>{
-	
-	/**
-	 * Enum che associa a ciascuna unità di tempo il corrispondente valore in secondi
-	 */
-	
-	private enum EpochValue {
-		HOUR(3600.d),
-		DAY(24.d * HOUR.value),
-		WEEK(7.d * DAY.value),
-		MONTH(30.d * DAY.value);
-		
-		private double value;
-		private EpochValue(double value) {
-			this.value = value;
-		}
-	}
 	/**
 	 * Costruttore
 	 * @param rappresenta l'oggetto passato
@@ -50,22 +36,21 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 	
 	private void buildLogic(Object param) {
 		String string = (String) param;
-		long now = System.currentTimeMillis()/1000; // epoch now
 		switch(string) {
 			case "hour":{
-				logic = rm -> rm.getEpoch() >= now - EpochValue.HOUR.value;
+				logic = rm -> rm.getEpoch() >= TimeData.NOW - EpochValue.HOUR.value;
 			}
 			break;
 			case "day":{
-				logic = rm -> rm.getEpoch() >= now - EpochValue.DAY.value;
+				logic = rm -> rm.getEpoch() >= TimeData.NOW - EpochValue.DAY.value;
 			}
 			break;
 			case "week":{
-				logic = rm -> rm.getEpoch() >= now - EpochValue.WEEK.value;
+				logic = rm -> rm.getEpoch() >= TimeData.NOW - EpochValue.WEEK.value;
 			}
 			break;
 			case "month":{
-				logic = rm -> rm.getEpoch() >= now - EpochValue.MONTH.value;
+				logic = rm -> rm.getEpoch() >= TimeData.NOW - EpochValue.MONTH.value;
 			}
 			break;
 			default:{
@@ -74,19 +59,19 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 					Long q = Long.parseLong(string.substring(1));
 					switch(c) {
 						case 'h': {
-							logic = rm-> rm.getEpoch() >= now - q * EpochValue.HOUR.value;
+							logic = rm-> rm.getEpoch() >= TimeData.NOW - q * EpochValue.HOUR.value;
 						}
 						break;
 						case 'd': {
-							logic = rm-> rm.getEpoch() >= now - q * EpochValue.DAY.value;
+							logic = rm-> rm.getEpoch() >= TimeData.NOW - q * EpochValue.DAY.value;
 						}
 						break;
 						case 'w': {
-							logic = rm-> rm.getEpoch() >= now - q * EpochValue.WEEK.value;
+							logic = rm-> rm.getEpoch() >= TimeData.NOW - q * EpochValue.WEEK.value;
 						}
 						break;
 						case 'm': {
-							logic = rm-> rm.getEpoch() >= now - q * EpochValue.MONTH.value;
+							logic = rm-> rm.getEpoch() >= TimeData.NOW - q * EpochValue.MONTH.value;
 						}
 						break;
 						default:{

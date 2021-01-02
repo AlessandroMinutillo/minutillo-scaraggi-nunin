@@ -13,11 +13,11 @@ import java.util.HashMap;
 import msn.weather_app.model.Metadata;
 import msn.weather_app.model.City;
 import msn.weather_app.model.RecordMeteo;
+import msn.weather_app.model.TimeData;
 import msn.weather_app.service.OpenWeatherService;
 import msn.weather_app.service.Scheduler;
 import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.parser.ParserFilter;
-import msn.weather_app.util.stats.Stats;
 import msn.weather_app.util.stats.StatsCalculator;
 import msn.weather_app.database.DatabaseClass;
 import msn.weather_app.exception.CoordException;
@@ -79,18 +79,22 @@ public class APIController {
 	 * base ai filtri utilizzati
 	 * @param body rappresenta la struttura del filtro da introdurre
 	 * @return i record filtrati
+	 * @see msn.weather_app.model.TimeData
 	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
 	 * @see msn.weather_app.database.DatabaseClass#getSearchedRecord(Filter)
+	 * @see msn.weather_app.database.DatabaseClass#freqDiv(ArrayList<RecordMeteo>,JSONObject)
 	 */
 	@PostMapping("/data/meteo/filtered")
-	public ArrayList<RecordMeteo> getMeteoFiltered(@RequestBody String body){
+	public HashMap<String,ArrayList<RecordMeteo>> getMeteoFiltered(@RequestBody String body){
+		TimeData.NOW = System.currentTimeMillis()/1000;
 		try {
 			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
-			return DatabaseClass.getSearchedRecord(filter);
+			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
+			return DatabaseClass.freqDiv(sample, new JSONObject(body));
 		}
 		catch(JSONException e) {
-			System.out.println("Malformed JSONObject: returning empty array\n" + e);
-			return new ArrayList<RecordMeteo>();
+			System.out.println("Malformed JSONObject: returning empty data\n" + e);
+			return new HashMap<String,ArrayList<RecordMeteo>>();
 		}
 	}
 	/**
@@ -111,7 +115,7 @@ public class APIController {
 	 * @param lon indica la longitudine
 	 * @return il JSONObject rappresentante il meteo attuale di una determinata città
 	 * @throws CoordException
-	 * @see msn.weather_app.service.OpenWeatherService#APICall
+	 * @see msn.weather_app.service.OpenWeatherService#APICall(String,String)
 	 * @see msn.weather_app.exception.CoordException
 	 */
 	@GetMapping("/now")
@@ -124,20 +128,23 @@ public class APIController {
 	 * Metodo POST per visualizzare le statistiche sulla temperatura dei dati meteo filtrati
 	 * @param body rappresenta la struttura del filtro da introdurre
 	 * @return le statistiche sui dati meteo filtrati
-	 * @see msn.weather_app.stats.StatsCalculator#calcTemp(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.model.TimeData
+	 * @see msn.weather_app.util.stats.StatsCalculator#calc(ArrayList <RecordMeteo> ,String,JSONObject)
 	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
+	 * @see msn.weather_app.database.DatabaseClass#getSearchedRecord(Filter)
 	 */
 	
 	@PostMapping("/stats/temp")
-	public HashMap<String,Double> getStatsTempFiltered(@RequestBody String body){
+	public HashMap<String, HashMap<String,Double> > getStatsTempFiltered(@RequestBody String body){
+		TimeData.NOW = System.currentTimeMillis()/1000;
 		try {
 			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
 			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
-			return StatsCalculator.calcTemp(sample).getStat();
+			return StatsCalculator.calc(sample, "temp", new JSONObject(body));
 		}
 		catch(JSONException e) {
 			System.out.println("Malformed JSONObject: returning empty stats\n" + e);
-			return new Stats().getStat();
+			return new HashMap<String, HashMap<String,Double> >();
 		}
 	}
 	
@@ -145,20 +152,23 @@ public class APIController {
 	 * Metodo POST per visualizzare le statistiche sulla pressione dei dati meteo filtrati
 	 * @param body rappresenta la struttura del filtro da introdurre
 	 * @return le statistiche sui dati meteo filtrati
-	 * @see msn.weather_app.stats.StatsCalculator#calcPress(ArrayList<RecordMeteo>)
+	 * @see msn.weather_app.model.TimeData
+	 * @see msn.weather_app.util.stats.StatsCalculator#calc(ArrayList<RecordMeteo>,String,JSONObject)
 	 * @see msn.weather_app.util.parser.ParserFilter#getFilter(JSONObject)
+	 * @see msn.weather_app.database.DatabaseClass#getSearchedRecord(Filter)
 	 */
 	
 	@PostMapping("/stats/press")
-	public HashMap<String,Double> getStatsPressFiltered(@RequestBody String body){
+	public HashMap<String, HashMap<String,Double> > getStatsPressFiltered(@RequestBody String body){
+		TimeData.NOW = System.currentTimeMillis()/1000;
 		try {
 			Filter<RecordMeteo> filter = ParserFilter.getFilter(new JSONObject(body));
 			ArrayList<RecordMeteo> sample = DatabaseClass.getSearchedRecord(filter);
-			return StatsCalculator.calcPress(sample).getStat();
+			return StatsCalculator.calc(sample, "press", new JSONObject(body));
 		}
 		catch(JSONException e) {
 			System.out.println("Malformed JSONObject: returning empty stats\n" + e);
-			return new Stats().getStat();
+			return new HashMap<String, HashMap<String,Double> >();
 		}
 	}
 }

@@ -1,11 +1,19 @@
 package msn.weather_app.util.stats;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONObject;
 
 import msn.weather_app.exception.SampleException;
+import msn.weather_app.model.Range;
 import msn.weather_app.model.RecordMeteo;
+import msn.weather_app.model.TimeData;
+import msn.weather_app.service.FilterService;
+import msn.weather_app.util.filter.Filter;
+import msn.weather_app.util.filter.FilterFreq;
 
-/** Classe che implementa il metodo calc per il calcolo delle statistiche
+/** Classe che implementa metodi per il calcolo delle statistiche
  * 
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
@@ -15,18 +23,67 @@ import msn.weather_app.model.RecordMeteo;
  */
 
 public class StatsCalculator {
+	/**
+	 * Restituisce le statistiche relative al periodo selezionato tramite filtro,
+	 * partizionandole in base alla frequenza richiesta dall'utente
+	 * 
+	 * 
+	 * @param sample ArrayList<RecordMeteo>
+	 * @param type indica se le statistiche riguardano temperatura o pressione
+	 * @param top JSONObject
+	 * @return ret HashMap<String, HashMap<String,Double> >
+	 */
+	
+	public static HashMap<String, HashMap<String,Double> > calc(ArrayList<RecordMeteo> sample, String type, JSONObject top){
+		
+		HashMap<String, HashMap<String,Double> > ret = new HashMap<String, HashMap<String,Double> >();
+			
+		long from, to, step;
+		
+		String freq = FilterService.setFreq(top);
+		step = FilterService.setStep(freq);
+		from = FilterService.setFrom(top);
+		to = TimeData.NOW;
+		
+		if(freq.equals("total") ) {
+			switch(type) {
+				case "temp" : ret.put(freq, calcTemp(sample));
+				break;
+				case "press" : ret.put(freq, calcPress(sample));
+				break;
+			}
+		}
+		else {
+			FilterService<RecordMeteo> fs = new FilterService<RecordMeteo>();
+			
+			for(long cont = 1; from < to; cont++) {
+				Range range = new Range(from, Math.min(from+step,to));
+				Filter<RecordMeteo> filter = new FilterFreq(range);
+				ArrayList<RecordMeteo> array = fs.applyFilter(filter, sample);
+				switch(type) {
+					case "temp" : ret.put(freq + "_" + cont, calcTemp(array));
+					break;
+					case "press" : ret.put(freq + "_" + cont, calcPress(array));
+					break;
+				}
+				from += step;
+			}
+		}
+		
+		return ret;
+	}
 	
 	
 	/**
 	 * Metodo statico che calcola le statistiche sulla temperatura relative al sample
 	 * 
 	 * @param sample ArrayList filtrato
-	 * @return statistiche
+	 * @return stat statistiche sulla temperatura
 	 */
 	
-	public static Stats calcTemp(ArrayList<RecordMeteo> sample) {
+	public static HashMap<String,Double> calcTemp(ArrayList<RecordMeteo> sample) {
 		
-		Stats stat = new Stats();
+		HashMap<String,Double> stat = new HashMap<String,Double>();
 		
 		try {
 			double n = sample.size();
@@ -61,12 +118,12 @@ public class StatsCalculator {
 			double tempCurVar = stDevTempCur/n;
 			double tempFeltVar = stDevTempFelt/n;
 			
-			stat.addField("tempMin",tempMin);
-			stat.addField("tempMax",tempMax);
-			stat.addField("tempCurAvg", tempCurAvg);
-			stat.addField("tempFeltAvg", tempFeltAvg);
-			stat.addField("tempCurVar", tempCurVar);
-			stat.addField("tempFeltVar", tempFeltVar);
+			stat.put("tempMin",tempMin);
+			stat.put("tempMax",tempMax);
+			stat.put("tempCurAvg", tempCurAvg);
+			stat.put("tempFeltAvg", tempFeltAvg);
+			stat.put("tempCurVar", tempCurVar);
+			stat.put("tempFeltVar", tempFeltVar);
 		}
 		catch(SampleException e) {
 			System.out.println("Sample is empty\n" + e);
@@ -78,12 +135,12 @@ public class StatsCalculator {
 	 * Metodo statico che calcola le statistiche sulla pressione relative al sample
 	 * 
 	 * @param sample ArrayList filtrato
-	 * @return statistiche
+	 * @return stat statistiche sulla pressione
 	 */
 	
-	public static Stats calcPress(ArrayList<RecordMeteo> sample) {
+	public static HashMap<String,Double> calcPress(ArrayList<RecordMeteo> sample) {
 		
-		Stats stat = new Stats();
+		HashMap<String,Double> stat = new HashMap<String,Double>();
 		
 		try {
 			double n = sample.size();
@@ -112,10 +169,10 @@ public class StatsCalculator {
 			
 			double pressVar = stDevPress/n;
 			
-			stat.addField("pressMin",pressMin);
-			stat.addField("pressMax",pressMax);
-			stat.addField("pressAvg", pressAvg);
-			stat.addField("pressVar", pressVar);
+			stat.put("pressMin",pressMin);
+			stat.put("pressMax",pressMax);
+			stat.put("pressAvg", pressAvg);
+			stat.put("pressVar", pressVar);
 		}
 		catch(SampleException e) {
 			System.out.println("Sample is empty\n" + e);

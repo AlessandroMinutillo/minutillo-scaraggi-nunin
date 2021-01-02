@@ -13,14 +13,19 @@ import java.io.IOException;
  * 
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import msn.weather_app.model.Metadata;
+import msn.weather_app.model.Range;
 import msn.weather_app.model.RecordMeteo;
+import msn.weather_app.model.TimeData;
 import msn.weather_app.service.FilterService;
 import msn.weather_app.model.City;
 import msn.weather_app.util.filter.Filter;
+import msn.weather_app.util.filter.FilterFreq;
 import msn.weather_app.util.filter.FilterSubstrC;
 import msn.weather_app.util.parser.*;
 
@@ -47,12 +52,14 @@ public class DatabaseClass {
 	 */
 	public static ArrayList<Metadata> getMetadata(){
 		
-		metadata.add(new Metadata("city","Città","City"));
-		metadata.add(new Metadata("name","Nome della città","String"));
+		//metadata.add(new Metadata("city","Città","City"));
+		metadata.add(new Metadata("name","Nome/i della/e città","String"));
 		metadata.add(new Metadata("coord","Coordinate della città","Coord"));
 		metadata.add(new Metadata("lat","Latitudine","Double"));
 		metadata.add(new Metadata("lon","Longitudine","Double"));
-		metadata.add(new Metadata("epoch","Data in formato UNIX","Long"));
+		metadata.add(new Metadata("period","Periodo di interesse","String"));
+		metadata.add(new Metadata("freq","Frequenza di interesse","String"));
+		//metadata.add(new Metadata("epoch","Data in formato UNIX","Long"));
 		metadata.add(new Metadata("temp","Temperatura","Temp"));
 		metadata.add(new Metadata("cur","Temperatura attuale (°C)","Double"));
 		metadata.add(new Metadata("min","Temperatura attuale minima (°C)","Double"));
@@ -60,7 +67,10 @@ public class DatabaseClass {
 		metadata.add(new Metadata("felt","Temperatura attuale percepita (°C)","Double"));
 		metadata.add(new Metadata("press","Pressione attuale (hPa)","Double"));
 		
-		metadata.add(new Metadata("tempMin","Temperatura minima (°C)","Double"));
+		metadata.add(new Metadata("from","Valore numerico minimo","Double"));
+		metadata.add(new Metadata("to","Valore numerico massimo","Double"));
+		
+		/*metadata.add(new Metadata("tempMin","Temperatura minima (°C)","Double"));
 		metadata.add(new Metadata("tempMax","Temperatura massima (°C)","Double"));
 		metadata.add(new Metadata("tempCurAvg","Media temperatura (°C)","Double"));
 		metadata.add(new Metadata("tempFeltAvg","Media temperatura percepita (°C)","Double"));
@@ -71,7 +81,7 @@ public class DatabaseClass {
 		metadata.add(new Metadata("pressMax","Pressione massima (hPa)","Double"));
 		metadata.add(new Metadata("pressMedia","Media della pressione (hPa)","Double"));
 		metadata.add(new Metadata("pressVar","Varianza della pressione","Double"));
-		
+		*/
 		return metadata;
 	}
 	/**
@@ -111,6 +121,43 @@ public class DatabaseClass {
 	public static ArrayList<RecordMeteo> getSearchedRecord(Filter<RecordMeteo> filter){
 		FilterService <RecordMeteo> fs = new FilterService <RecordMeteo>();
         return fs.applyFilter(filter, meteoData);
+	}
+	
+	/**
+	 * Restituisce i dati RecordMeteo relativi al periodo selezionato tramite filtro,
+	 * partizionandoli in base alla frequenza richiesta dall'utente
+	 * 
+	 * @param sample ArrayList<RecordMeteo> da partizionare in base alla frequenza richiesta
+	 * @param top JSONObject
+	 * @return ret HashMap<String, ArrayList<RecordMeteo> >
+	 */
+	
+	
+	public static HashMap<String,ArrayList<RecordMeteo>> freqDiv(ArrayList<RecordMeteo> sample, JSONObject top){
+		HashMap<String, ArrayList<RecordMeteo> > ret = new HashMap<String, ArrayList<RecordMeteo> >();
+		
+		long from, to, step;
+		to = TimeData.NOW;
+		
+		String freq = FilterService.setFreq(top);
+		step = FilterService.setStep(freq);
+		from = FilterService.setFrom(top);
+		
+		if(freq.equals("total") ) 
+			ret.put(freq, sample);
+		else {
+			FilterService<RecordMeteo> fs = new FilterService<RecordMeteo>();
+			
+			for(long cont = 1; from < to; cont++) {
+				Range range = new Range(from, Math.min(from+step,to));
+				Filter<RecordMeteo> filter = new FilterFreq(range);
+				ArrayList<RecordMeteo> array = fs.applyFilter(filter, sample);
+				ret.put(freq + "_" + cont, array);
+				from += step;
+			}
+		}
+		
+		return ret;
 	}
 	
 	/**
@@ -158,6 +205,5 @@ public class DatabaseClass {
 			System.out.println("I/O error\n" + e);
 		}
 	}
-	
 	
 }
