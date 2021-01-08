@@ -1,0 +1,9 @@
+msn.weather_app
+msn.weather_app.controller
+msn.weather_app.database
+msn.weather_app.exception
+msn.weather_app.model
+msn.weather_app.service
+msn.weather_app.util.filter
+msn.weather_app.util.parser
+msn.weather_app.util.stats

@@ -24,14 +24,11 @@ import msn.weather_app.util.filter.FilterFreq;
 
 public class StatsCalculator {
 	/**
-	 * Restituisce le statistiche relative al periodo selezionato tramite filtro,
-	 * partizionandole in base alla frequenza richiesta dall'utente
-	 * 
-	 * 
-	 * @param sample ArrayList<RecordMeteo>
+	 * Restituisce le statistiche relative al periodo selezionato tramite filtro, partizionandole in base alla frequenza richiesta dall'utente
+	 * @param sample ArrayList di RecordMeteo
 	 * @param type indica se le statistiche riguardano temperatura o pressione
 	 * @param top JSONObject
-	 * @return ret HashMap<String, HashMap<String,Double> >
+	 * @return ret
 	 */
 	
 	public static HashMap<String, HashMap<String,Double> > calc(ArrayList<RecordMeteo> sample, String type, JSONObject top){
@@ -76,12 +73,11 @@ public class StatsCalculator {
 	
 	/**
 	 * Metodo statico che calcola le statistiche sulla temperatura relative al sample
-	 * 
 	 * @param sample ArrayList filtrato
 	 * @return stat statistiche sulla temperatura
 	 */
 	
-	public static HashMap<String,Double> calcTemp(ArrayList<RecordMeteo> sample) {
+	private static HashMap<String,Double> calcTemp(ArrayList<RecordMeteo> sample) {
 		
 		HashMap<String,Double> stat = new HashMap<String,Double>();
 		
@@ -138,7 +134,7 @@ public class StatsCalculator {
 	 * @return stat statistiche sulla pressione
 	 */
 	
-	public static HashMap<String,Double> calcPress(ArrayList<RecordMeteo> sample) {
+	private static HashMap<String,Double> calcPress(ArrayList<RecordMeteo> sample) {
 		
 		HashMap<String,Double> stat = new HashMap<String,Double>();
 		

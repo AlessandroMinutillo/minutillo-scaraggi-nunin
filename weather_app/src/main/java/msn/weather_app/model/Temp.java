@@ -1,4 +1,7 @@
 package msn.weather_app.model;
+
+import org.json.JSONObject;
+
 /**
  * Implementazione della classe Temp
  * 
@@ -9,8 +12,6 @@ package msn.weather_app.model;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-
-import org.json.JSONObject;
 
 public class Temp {
 	
@@ -106,6 +107,12 @@ public class Temp {
 	public void setFelt(double felt) {
 		this.felt = felt;
 	}
+	
+	/**
+	 * Converte l'oggetto in JSONObject
+	 * @return ret JSONObject
+	 */
+	
 	public JSONObject toJSONObject() {
 		JSONObject ret =new JSONObject();
 		ret.put("cur", this.cur);

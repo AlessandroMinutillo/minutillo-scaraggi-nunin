@@ -18,7 +18,7 @@ import msn.weather_app.util.filter.*;
 public class ParserFilter {
 	/**
 	 * Restituisce un filtro a partire dal JSONObject top passatogli
-	 * @param top
+	 * @param top JSONObject
 	 * @return ComposedFilter
 	 */
 	

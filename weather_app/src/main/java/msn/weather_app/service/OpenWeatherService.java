@@ -1,11 +1,5 @@
 package msn.weather_app.service;
-/**
- * Implementazione della classe OpenWeatherService
- * 
- * @author Alessandro Minutillo 
- * @author Vito Scaraggi
- * @author Davide Nunin
- */
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -24,17 +18,25 @@ import msn.weather_app.model.Coord;
 import msn.weather_app.model.RecordMeteo;
 import msn.weather_app.util.parser.ParserMeteo;
 import msn.weather_app.exception.CoordException;
+
+/**
+ * Implementazione della classe OpenWeatherService
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
+
 public class OpenWeatherService {
+	
+	private static String url;
+	
 	/**
-	 * Effettua una richiesta alle API di Openweather restituendo un RecordMeteo
-	 * contenente il meteo (attuale) di una coppia di coordinate geografiche valide
-	 * @param lat indica la latitudine geografica della città 
-	 * @param lon indica la longitudine geografica della città
-	 * @return l'oggetto RecordMeteo contenente il meteo attuale alle coordinate passate
-	 * @throws CoordException
-	 * @see msn.weather_app.exception.CoordException
-	 * @see msn.weather_app.model.RecordMeteo
+	 * Setta l'url della richiesta alle API di OpenWeather
+	 * @param lat latitudine
+	 * @param lon longitudine
 	 */
+	
 	private static void setUrl(String lat, String lon) {
 		try {
 			BufferedReader fin = new BufferedReader(new FileReader("config/configuration.json"));
@@ -54,7 +56,17 @@ public class OpenWeatherService {
 			System.out.println("Malformed JSON\n" + e);
 		}
 	}
-	private static String url;
+	
+	/**
+	 * Effettua una richiesta alle API di Openweather restituendo un RecordMeteo
+	 * contenente il meteo (attuale) di una coppia di coordinate geografiche valide
+	 * @param lat indica la latitudine geografica della città 
+	 * @param lon indica la longitudine geografica della città
+	 * @return l'oggetto RecordMeteo contenente il meteo attuale alle coordinate passate
+	 * @throws CoordException
+	 * @see msn.weather_app.exception.CoordException
+	 * @see msn.weather_app.model.RecordMeteo
+	 */
 	public static RecordMeteo APICall (String lat, String lon) throws CoordException {
 	
 	

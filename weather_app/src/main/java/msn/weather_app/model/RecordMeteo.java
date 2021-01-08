@@ -51,8 +51,7 @@ public class RecordMeteo {
 		this.city = city;
 	}
 	
-	public RecordMeteo() {
-	}
+	public RecordMeteo() {}
 	
 	/**
 	 * @return temp
@@ -62,7 +61,7 @@ public class RecordMeteo {
 	}
 	
 	/**
-	 * Imposta il tempo
+	 * Imposta la temperatura
 	 * @param temp
 	 */
 	public void setTemp(Temp temp) {
@@ -113,6 +112,12 @@ public class RecordMeteo {
 	public void setCity(City city) {
 		this.city = city;
 	}
+	
+	/**
+	 * Converte l'oggetto in JSONObject
+	 * @return ret JSONObject
+	 */
+	
 	public JSONObject toJSONObject() {
 		JSONObject ret =new JSONObject();
 		ret.put("epoch", this.epoch);

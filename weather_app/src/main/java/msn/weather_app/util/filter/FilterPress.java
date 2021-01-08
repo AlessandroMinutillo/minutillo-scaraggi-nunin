@@ -1,8 +1,11 @@
 package msn.weather_app.util.filter;
+import msn.weather_app.model.Range;
+import msn.weather_app.model.RecordMeteo;
+
 /**
  * Implementazione della classe FilterPress
  *  
- * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * Classe che implementa un filtro applicabile a ArrayList di RecordMeteo:
  * seleziona tutti i RecordMeteo che corrispondono al range di pressione
  * inserito come parametro di ricerca
  *  
@@ -10,13 +13,11 @@ package msn.weather_app.util.filter;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-import msn.weather_app.model.Range;
-import msn.weather_app.model.RecordMeteo;
 
 public class FilterPress extends Filter<RecordMeteo>{
 	/**
 	 * Costruttore
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.util.filter.FilterPress#buildLogic(Object)
 	 */
 	public FilterPress(Object param) {
@@ -26,7 +27,7 @@ public class FilterPress extends Filter<RecordMeteo>{
 	
 	/** 
 	 * Costruisce l'oggetto di tipo Predicate
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.model.Range#contains(double)
 	 * @see msn.weather_app.model.RecordMeteo#getPress()
 	 */

@@ -1,10 +1,13 @@
 package msn.weather_app.util.filter;
 
+import msn.weather_app.model.RecordMeteo;
+
+
 /**
  * Implementazione della classe FilterSubstrRM
 
  *  
- * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * Classe che implementa un filtro applicabile a ArrayList di RecordMeteo:
  * seleziona tutti i RecordMeteo in cui il nome della città contiene la
  * sottostringa o le sottostringhe inserite come parametri di ricerca
  *
@@ -13,13 +16,11 @@ package msn.weather_app.util.filter;
  * @author Davide Nunin
  */
 
-import msn.weather_app.model.RecordMeteo;
-
 public class FilterSubstrRM extends Filter<RecordMeteo>{
 	
 	/**
 	 * Costruttore
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.util.filter.FilterSubstrRM#buildLogic(Object)
 	 */
 	public FilterSubstrRM(Object param) {
@@ -29,7 +30,7 @@ public class FilterSubstrRM extends Filter<RecordMeteo>{
 	
 	/**
 	 * Costruisce l'oggetto di tipo Predicate
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.model.RecordMeteo#getCity()
 	 * @see msn.weather_app.model.City#getName()
 	 */

@@ -1,4 +1,10 @@
 package msn.weather_app;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+import msn.weather_app.database.DatabaseClass;
+
 /**
  * Implementazione della classe WeatherAppApplication
  *  
@@ -6,11 +12,6 @@ package msn.weather_app;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
-
-import msn.weather_app.database.DatabaseClass;
 
 @SpringBootApplication
 @EnableScheduling

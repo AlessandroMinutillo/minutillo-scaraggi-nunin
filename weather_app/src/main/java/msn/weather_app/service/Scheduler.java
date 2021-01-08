@@ -16,13 +16,19 @@ import msn.weather_app.model.City;
 import msn.weather_app.model.Coord;
 import msn.weather_app.model.RecordMeteo;
 
+/**
+ * Implementazione dello Scheduler
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
+
 @Component
 public class Scheduler {
 	/**
 	 * 
 	 * @return cities un ArrayList di città contenute nel file CitiesToSample.json
-	 * @throws IOException, FileNotFoundException
-	 *
 	 */
 	public static ArrayList<City> readSample() {
 		String text = "";
@@ -48,7 +54,6 @@ public class Scheduler {
 	}
 	
 	/**Aggiorna ad intervalli di un' ora il file meteo.data.json
-	 * @throws CoordException
 	 */
 	@Scheduled(fixedRate =3600000 )
 	public static void update() {

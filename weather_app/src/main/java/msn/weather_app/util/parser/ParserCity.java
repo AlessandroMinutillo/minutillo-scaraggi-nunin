@@ -21,10 +21,10 @@ import java.util.ArrayList;
  */
 public class ParserCity implements Parser<City>{
 	/**
-	 * Legge i dati contenuti in city.list.min.json , e li restituisce sotto forma di ArrayList<City>
+	 * Legge i dati contenuti in city.list.min.json, e li restituisce sotto forma di ArrayList di City
 	 * @return cityList
-	 * @throws FileNotFoundException, IoException, StreamCorruptedException
 	 */
+	
 	public  ArrayList<City> load() {
 		
 		ArrayList<City> cityList = new ArrayList<City>();

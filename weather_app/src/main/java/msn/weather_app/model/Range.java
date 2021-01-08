@@ -26,8 +26,7 @@ public class Range{
 	/**
 	 * @param d indica il numero (double) di cui si vuole verificare
 	 * l'appartenenza all'intervallo
-	 * @return true se il numero d appartiene al range dato
-	 * @return false se il numero d non appartiene al range dato
+	 * @return true se il numero d appartiene al range dato, false altrimenti
 	 */
 	public boolean contains(double d) {
 		return d >= from.doubleValue() && d<=to.doubleValue();
@@ -35,8 +34,7 @@ public class Range{
 	/**
 	 * @param l indica il numero (long) di cui si vuole verificare
 	 * l'appartenenza all'intervallo
-	 * @return true se il numero l appartiene al range dato
-	 * @return false se il numero l non appartiene al range dato
+	 * @return true se il numero l appartiene al range dato, false altrimenti
 	 */
 	public boolean contains(long l) {
 		return l >= from.longValue() && l<=to.longValue();

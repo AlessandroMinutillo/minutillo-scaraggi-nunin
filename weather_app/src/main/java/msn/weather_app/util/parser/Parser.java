@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
  * @author Davide Nunin
- * @param <E>
  */
 public interface Parser<E>{
 	public ArrayList<E> load();

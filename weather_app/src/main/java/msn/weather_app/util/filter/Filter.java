@@ -1,15 +1,15 @@
 package msn.weather_app.util.filter;
+
+import java.util.function.Predicate;
+
 /**
  * Implementazione della classe Filter
- *  
  * Classe generica che implementa un filtro avente come unico attributo un oggetto di tipo Predicate
  *  
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-
-import java.util.function.Predicate;
 
 public class Filter<T>{
 	/**

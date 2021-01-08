@@ -24,7 +24,7 @@ public class City {
 	/**
 	 * Costruttore
 	 * @param name rappresenta il nome della città
-	 * @param coords rappresenta le coordinate geografiche della città
+	 * @param coord rappresenta le coordinate geografiche della città
 	 */
 	public City(String name, Coord coord) {
 		this.name = name;
@@ -52,12 +52,17 @@ public class City {
 	}
 	/**
 	 * Imposta le coordinate della città
-	 * @param coords indica le coordinate da impostare
+	 * @param coord indica le coordinate da impostare
 	 * @see msn.weather_app.model.Coord
 	 */
 	public void setCoord(Coord coord) {
 		this.coord = coord;
 	}
+	
+	/**
+	 * Converte l'oggetto in JSONObject
+	 * @return ret JSONObject
+	 */
 	
 	public JSONObject toJSONObject() {
 		JSONObject ret =new JSONObject();

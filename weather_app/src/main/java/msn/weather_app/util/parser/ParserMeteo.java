@@ -27,7 +27,6 @@ public class ParserMeteo implements Parser<RecordMeteo>{
 	/**
 	 * Restituisce l' ArrayList contenente i dati del file meteo.data.json
 	 * @return meteoData
-	 * @throws IOException, FileNotFoundException, StreamCorruptedException
 	 */
 public ArrayList<RecordMeteo> load() {
 		
@@ -62,7 +61,7 @@ public ArrayList<RecordMeteo> load() {
 	}
 	/**
 	 * Costruisce un oggetto di tipo RecordMeteo a partire da un JSONObject
-	 * @param top
+	 * @param top JSONObject
 	 * @return RecordMeteo
 	 */
 	private static RecordMeteo mkRecordMeteo(JSONObject top) {
@@ -82,7 +81,8 @@ public ArrayList<RecordMeteo> load() {
 		return new RecordMeteo(temp,press,epoch,city);
 	}
 	/**
-	 * Converte un JSONObject in RecordMeteo
+	 * Converte un JSONObject restituito dalle API OpenWeather in RecordMeteo
+	 * @param obj JSONObject
 	 * @return res
 	 */
 	public static RecordMeteo JSONtoMeteo(JSONObject obj){

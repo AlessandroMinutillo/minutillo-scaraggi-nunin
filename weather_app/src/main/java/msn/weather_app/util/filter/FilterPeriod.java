@@ -1,25 +1,26 @@
 package msn.weather_app.util.filter;
 
+import msn.weather_app.exception.FilterException;
+import msn.weather_app.model.TimeData;
+import msn.weather_app.model.EpochValue;
+import msn.weather_app.model.RecordMeteo;
+
 /**
  * Implementazione della classe FilterPeriod
  *  
- * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * Classe che implementa un filtro applicabile a ArrayList di RecordMeteo:
  * seleziona tutti i RecordMeteo che corrispondono al periodo inserito come parametro di ricerca
  *  
  * @author Alessandro Minutillo 
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-import msn.weather_app.exception.FilterException;
-import msn.weather_app.model.TimeData;
-import msn.weather_app.model.EpochValue;
-import msn.weather_app.model.RecordMeteo;
 
 
 public class FilterPeriod extends Filter<RecordMeteo>{
 	/**
 	 * Costruttore
-	 * @param rappresenta l'oggetto passato
+	 * @param param rappresenta l'oggetto passato
 	 * @see msn.weather_app.util.filter.FilterPeriod#buildLogic(Object)
 	 */
 	public FilterPeriod(Object param){
@@ -29,7 +30,7 @@ public class FilterPeriod extends Filter<RecordMeteo>{
 	
 	/**
 	 * costruisce l'oggetto di tipo Predicate
-	 * @param rappresenta l'oggetto passato
+	 * @param param rappresenta l'oggetto passato
 	 * @see msn.weather_app.model.RecordMeteo#getEpoch()
 	 * @see msn.weather_app.exception.FilterException#FilterException()
 	 */

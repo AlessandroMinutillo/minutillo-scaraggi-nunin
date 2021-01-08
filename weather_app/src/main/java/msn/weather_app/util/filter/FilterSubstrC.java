@@ -1,8 +1,10 @@
 package msn.weather_app.util.filter;
+import msn.weather_app.model.City;
+
 /**
  * Implementazione della classe FilterSubstrC
  *  
- * Classe che implementa un filtro applicabile a ArrayList<City>:
+ * Classe che implementa un filtro applicabile a ArrayList di City:
  * seleziona tutti i City in cui il nome della città contiene la
  * sottrostringa come parametro di ricerca
  *  
@@ -10,13 +12,12 @@ package msn.weather_app.util.filter;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-import msn.weather_app.model.City;
 
 public class FilterSubstrC extends Filter<City>{
 	
 	/**
 	 * Costruttore
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.util.filter.FilterSubstrC#buildLogic(Object)
 	 */
 	public FilterSubstrC(Object param) {
@@ -26,7 +27,7 @@ public class FilterSubstrC extends Filter<City>{
 	
 	/**
 	 * Costruisce l'oggetto di tipo Predicate
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.model.City#getName()
 	 */
 	

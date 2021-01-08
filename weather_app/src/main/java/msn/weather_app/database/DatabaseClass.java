@@ -2,16 +2,7 @@ package msn.weather_app.database;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-/**
- * Implementazione della classe DatabaseClass
- * 
- * Contiene i dati relativi al meteo e alle città esistenti
- * 
- * @author Alessandro Minutillo 
- * @author Vito Scaraggi
- * @author Davide Nunin
- * 
- */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -28,6 +19,17 @@ import msn.weather_app.util.filter.Filter;
 import msn.weather_app.util.filter.FilterFreq;
 import msn.weather_app.util.filter.FilterSubstrC;
 import msn.weather_app.util.parser.*;
+
+/**
+ * Implementazione della classe DatabaseClass
+ * 
+ * Contiene i dati relativi al meteo e alle città esistenti
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ * 
+ */
 
 public class DatabaseClass {
 	/**
@@ -52,14 +54,14 @@ public class DatabaseClass {
 	 */
 	public static ArrayList<Metadata> getMetadata(){
 		
-		//metadata.add(new Metadata("city","Città","City"));
+		metadata.add(new Metadata("city","Città","City"));
 		metadata.add(new Metadata("name","Nome/i della/e città","String"));
 		metadata.add(new Metadata("coord","Coordinate della città","Coord"));
 		metadata.add(new Metadata("lat","Latitudine","Double"));
 		metadata.add(new Metadata("lon","Longitudine","Double"));
 		metadata.add(new Metadata("period","Periodo di interesse","String"));
 		metadata.add(new Metadata("freq","Frequenza di interesse","String"));
-		//metadata.add(new Metadata("epoch","Data in formato UNIX","Long"));
+		metadata.add(new Metadata("epoch","Data in formato UNIX","Long"));
 		metadata.add(new Metadata("temp","Temperatura","Temp"));
 		metadata.add(new Metadata("cur","Temperatura attuale (°C)","Double"));
 		metadata.add(new Metadata("min","Temperatura attuale minima (°C)","Double"));
@@ -70,7 +72,7 @@ public class DatabaseClass {
 		metadata.add(new Metadata("from","Valore numerico minimo","Double"));
 		metadata.add(new Metadata("to","Valore numerico massimo","Double"));
 		
-		/*metadata.add(new Metadata("tempMin","Temperatura minima (°C)","Double"));
+		metadata.add(new Metadata("tempMin","Temperatura minima (°C)","Double"));
 		metadata.add(new Metadata("tempMax","Temperatura massima (°C)","Double"));
 		metadata.add(new Metadata("tempCurAvg","Media temperatura (°C)","Double"));
 		metadata.add(new Metadata("tempFeltAvg","Media temperatura percepita (°C)","Double"));
@@ -81,7 +83,6 @@ public class DatabaseClass {
 		metadata.add(new Metadata("pressMax","Pressione massima (hPa)","Double"));
 		metadata.add(new Metadata("pressMedia","Media della pressione (hPa)","Double"));
 		metadata.add(new Metadata("pressVar","Varianza della pressione","Double"));
-		*/
 		return metadata;
 	}
 	/**
@@ -124,12 +125,10 @@ public class DatabaseClass {
 	}
 	
 	/**
-	 * Restituisce i dati RecordMeteo relativi al periodo selezionato tramite filtro,
-	 * partizionandoli in base alla frequenza richiesta dall'utente
-	 * 
-	 * @param sample ArrayList<RecordMeteo> da partizionare in base alla frequenza richiesta
+	 * Restituisce i dati RecordMeteo relativi al periodo selezionato tramite filtro, partizionandoli in base alla frequenza richiesta dall'utente
+	 * @param sample ArrayList di RecordMeteo da partizionare in base alla frequenza richiesta
 	 * @param top JSONObject
-	 * @return ret HashMap<String, ArrayList<RecordMeteo> >
+	 * @return ret
 	 */
 	
 	
@@ -181,14 +180,13 @@ public class DatabaseClass {
 	/**
 	 *aggiunge i dati contenuti nell' ArrayList data a meteoData
 	 *
-	 * @param data
+	 * @param data ArrayList di RecordMeteo
 	 */
 	public static void updateMeteoData(ArrayList<RecordMeteo> data) {
 			meteoData.addAll(data);
 	}
 	/**
 	 * Salva i dati contenuti nell' ArrayList meteoData nel file meteo.data.json in formato JSON
-	 * @throws IOException 
 	 * 
 	 */
 	public static void save() {

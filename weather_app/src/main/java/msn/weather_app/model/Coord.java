@@ -1,4 +1,9 @@
 package msn.weather_app.model;
+
+import org.json.JSONObject;
+
+import msn.weather_app.exception.CoordException;
+
 /**
  * Implementazione della classe Coord
  * 
@@ -8,11 +13,6 @@ package msn.weather_app.model;
  * @author Vito Scaraggi
  * @author Davide Nunin
  */
-
-
-import org.json.JSONObject;
-
-import msn.weather_app.exception.CoordException;
 
 public class Coord {
 	/**
@@ -58,10 +58,9 @@ public class Coord {
 	public void setLon(double lon) {
 		this.lon = lon;
 	}
+	
 	/**
-	 * Controlla se le coordinate sono valide (-90<=lat<=90,-180<=lon<=180)
-	 * @return true se le coordinate sono valide
-	 * @return false se le coordinate non sono valide
+	 * Controlla se le coordinate sono valide
 	 * @throws CoordException 
 	 */
 	public void validate() throws CoordException {
@@ -70,6 +69,11 @@ public class Coord {
 		}
 	}
 	
+	
+	/**
+	 * Converte l'oggetto in JSONObject
+	 * @return ret JSONObject
+	 */
 	
 	public JSONObject toJSONObject() {
 		JSONObject ret =new JSONObject();

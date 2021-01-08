@@ -1,8 +1,13 @@
 package msn.weather_app.util.filter;
+
+import msn.weather_app.model.Coord;
+
+import msn.weather_app.model.RecordMeteo;
+
 /**
  * Implementazione della classe FilterCoord
  *  
- * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * Classe che implementa un filtro applicabile a ArrayList di RecordMeteo:
  * seleziona tutti i RecordMeteo che corrispondono ai valori di latitudine e longitudine
  * inseriti come parametri di ricerca
  *  
@@ -11,14 +16,10 @@ package msn.weather_app.util.filter;
  * @author Davide Nunin
  */
 
-import msn.weather_app.model.Coord;
-
-import msn.weather_app.model.RecordMeteo;
-
 public class FilterCoord extends Filter<RecordMeteo>{
 	/**
 	 * Costruttore
-	 * @param rappresenta l'oggetto passato 
+	 * @param param rappresenta l'oggetto passato 
 	 * @see msn.weather_app.util.filter.FilterCoord#buildLogic(Object)
 	 */
 	public FilterCoord(Object param) {
@@ -28,7 +29,7 @@ public class FilterCoord extends Filter<RecordMeteo>{
 	
 	/**
 	 * Costruisce l'oggetto di tipo Predicate
-	 * @param rappresenta l'oggetto passato
+	 * @param param rappresenta l'oggetto passato
 	 * @see msn.weather_app.model.RecordMeteo#getCity()
 	 * @see msn.weather_app.model.City#getCoords()
 	 * @see msn.weather_app.model.Coord#getLat()

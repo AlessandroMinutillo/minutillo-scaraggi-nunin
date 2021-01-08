@@ -4,9 +4,9 @@ import msn.weather_app.model.Range;
 import msn.weather_app.model.RecordMeteo;
 
 /**
- * Implementazione della classe FilterSubstrRM
+ * Implementazione della classe FilterFreq
  *  
- * Classe che implementa un filtro applicabile a ArrayList<RecordMeteo>:
+ * Classe che implementa un filtro applicabile a ArrayList di RecordMeteo:
  * seleziona tutti i RecordMeteo che corrispondono al range di epoch
  * inserito come parametro di ricerca
  *
@@ -18,7 +18,7 @@ import msn.weather_app.model.RecordMeteo;
 public class FilterFreq extends Filter <RecordMeteo> {
 	/**
 	 * Costruttore
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.util.filter.FilterFreq#buildLogic(Object)
 	 */
 	public FilterFreq(Object param) {
@@ -28,7 +28,7 @@ public class FilterFreq extends Filter <RecordMeteo> {
 	
 	/**
 	 * Costruisce l'oggetto di tipo Predicate
-	 * @param indica l'oggetto passato
+	 * @param param indica l'oggetto passato
 	 * @see msn.weather_app.model.Range#contains(long)
 	 * @see msn.weather_app.model.RecordMeteo#getEpoch()
 	 */

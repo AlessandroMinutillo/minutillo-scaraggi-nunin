@@ -1,5 +1,16 @@
 package msn.weather_app.exception;
 
+/**
+ * Implementazione della classe SampleException
+ * 
+ * Eccezione che si verifica quando ci sono errori relativi ai campioni meteo
+ * 
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
+
+
 public class SampleException extends Exception{
 	/**
 	 * 

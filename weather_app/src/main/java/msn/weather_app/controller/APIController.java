@@ -1,12 +1,5 @@
 package msn.weather_app.controller;
-/**
- * Implementazione della classe APIController
- * In questa classe verranno definite tutti i possbili metodi GET e POST 
- * della nostra SpringBootApp
- * @author Alessandro Minutillo 
- * @author Vito Scaraggi
- * @author Davide Nunin
- */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +23,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Implementazione della classe APIController
+ * In questa classe sono definiti tutti i possbili metodi GET e POST 
+ * della nostra SpringBootApp
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
+
 @RestController
 public class APIController {
 	/**
@@ -42,7 +44,7 @@ public class APIController {
 		return DatabaseClass.getMetadata();
 	}
 	/**
-	 * Metodo GET per la visualizzazione di ArrayList<City> cityList
+	 * Metodo GET per la visualizzazione di ArrayList di City cityList
 	 * @return il file di configurazione in formato JSON
 	 * @see msn.weather_app.database.DatabaseClass#getCityList()
 	*/
@@ -65,7 +67,7 @@ public class APIController {
 	} 
 	
 	/**
-	 * Metodo GET per la visualizzazione di ArrayList<RecordMeteo> meteoData 
+	 * Metodo GET per la visualizzazione di ArrayList di RecordMeteo meteoData 
 	 * @return il record MeteoData
 	 * @see msn.weather_app.database.DatabaseClass#getMeteoData()
 	 */

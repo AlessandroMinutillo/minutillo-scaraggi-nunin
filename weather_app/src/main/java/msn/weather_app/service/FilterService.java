@@ -1,13 +1,5 @@
 package msn.weather_app.service;
-/**
- * Implementazione della classe FilterSubstrRM
- *  
- * Classe generica che applica un filtro a un ArrayList
- *
- * @author Alessandro Minutillo 
- * @author Vito Scaraggi
- * @author Davide Nunin
- */
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,12 +11,23 @@ import msn.weather_app.model.EpochValue;
 import msn.weather_app.model.TimeData;
 import msn.weather_app.util.filter.Filter;
 
+/**
+ * Implementazione della classe FilterService
+ *  
+ * Classe generica che applica un filtro a un ArrayList
+ *
+ * @author Alessandro Minutillo 
+ * @author Vito Scaraggi
+ * @author Davide Nunin
+ */
+
 public class FilterService<T> {
 	
 	/**
 	 * Applica un filtro a un ArrayList
 	 * @param filter rappresenta l'oggetto passato di tipo Filter
 	 * @param list rappresenta l'oggetto passato di tipo ArrayList
+	 * @return ArrayList del tipo T
 	 */
 	
 	public ArrayList<T> applyFilter(Filter<T> filter, ArrayList<T> list){
@@ -42,7 +45,7 @@ public class FilterService<T> {
 	
 	public static String setFreq(JSONObject top) {
 		
-		String freq = "";
+		String freq = "total";
 		
 		try {
 			if(top.has("freq")) {
@@ -80,7 +83,7 @@ public class FilterService<T> {
 	
 	/**
 	 * Restituisce il numero di secondi corrispondente alla frequenza richiesta
-	 * @param freq
+	 * @param freq stringa che indica la frequenza
 	 * @return step
 	 */
 	
@@ -121,7 +124,7 @@ public class FilterService<T> {
 	/**
 	 * Restituisce l'estremo inferiore del periodo di interesse in secondi
 	 * 
-	 * @param top
+	 * @param top JSONObject
 	 * @return from
 	 */
 	

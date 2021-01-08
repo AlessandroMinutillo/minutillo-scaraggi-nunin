@@ -2,6 +2,10 @@ package msn.weather_app.model;
 
 /**
  * Enum che associa a ciascuna unità di tempo il corrispondente valore in secondi
+ * 
+ * @author Alessandro Minutillo
+ * @author Vito Scaraggi
+ * @author Davide Nunin
  */
 
 public enum EpochValue {
