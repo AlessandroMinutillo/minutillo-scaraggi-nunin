@@ -46,14 +46,20 @@ L'applicazione del filtro a una Collection di oggetti City e RecordMeteo è svil
 I filtri possono essere utilizzati nelle rotte POST dell'applicativo. La seguente immagine mostra un esempio di JSONObject contenente i campi applicabili nel filtro.
 I campi del filtro presenti nel JSONObject sono concatenati di default in AND.
 
-<IMMAGINE>
-  
-<ESEMPIO FILTRO>
+Struttura filro generico
+![Generic_Filter](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_filter.JPG)
+ 
+Esempio di filtro applicabile
+
+![Filter_Example1](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/json_data.JPG)
+![Filter_Example2](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_data.JPG)
 
 ## Statistiche
 Le statistiche relative a pressione e temperatura sono visualizzabili separatamente con le rotte POST "stats/temp" e "stats/press". Entrambe le rotte restituiscono un JSONObject contenente le statistiche di temperatura e pressione filtrate, inerenti il periodo (campo "period") selezionato e suddivise in base alla periodicità richiesta (campo "freq"). A livello implementativo, ogni statistica è rappresentata da un oggetto di tipo HashMap < String, HashMap < String, Double> > costruito dalla classe StatsCalculator contenuta nel package stats.
 
-<ESEMPIO STATISTICHE>
+Esempio statistiche
+![Stats_Example2](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/json_stat.JPG)
+![Stats_Example1](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_stat.JPG)
 
 
 ## Diagramma delle classi
