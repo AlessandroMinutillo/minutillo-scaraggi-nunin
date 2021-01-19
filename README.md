@@ -52,9 +52,11 @@ Struttura filro generico
 Esempio di filtro applicabile
 
 JSON della richiesta
+
 ![Filter_Example1](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/json_data.JPG)
 
 JSON in output
+
 ![Filter_Example2](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_data.JPG)
 
 ## Statistiche
@@ -63,9 +65,11 @@ Le statistiche relative a pressione e temperatura sono visualizzabili separatame
 Esempio statistiche
 
 JSON della richiesta
+
 ![Stats_Example2](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/json_stat.JPG)
 
 JSON in output
+
 ![Stats_Example1](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_stat.JPG)
 
 
