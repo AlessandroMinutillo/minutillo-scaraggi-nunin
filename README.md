@@ -29,7 +29,7 @@ L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di
 
 - msn.weather_app
 
-![application](link)
+![application](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/packages.jpg)
 
 - msn.weather_app.controller
 
@@ -37,31 +37,31 @@ L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di
 
 - msn.weather_app.database
 
-![database](link)
+![database](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/database.jpg)
 
 - msn.weather_app.exception
 
-![exception](link)
+![exception](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/exception.jpg)
 
 - msn.weather_app.model
 
-![model](link)
+![model](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/model.jpg)
 
 - msn.weather_app.service
 
-![service](link)
+![service](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/service.jpg)
 
 - msn.weather_app.util.filter
 
-![filter](link)
+![filter](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/filter.jpg)
 
 - msn.weather_app.util.parser
 
-![parser](link)
+![parser](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/parser.jpg)
 
 - msn.weather_app.util.stats
 
-![stats](link)
+![stats](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/stats.jpg)
 
 ## Diagramma delle sequenze
 
