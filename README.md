@@ -40,8 +40,21 @@ Mediante il nostro applicativo l'utente potrà:
 |  "/stats/press"     | Post | Rotta che permette di visualizzare le statistiche sulla pressione dei dati meteo campionati dall'applicazione, filtrati mediante i parametri contenuti nel JSON body |"name", "coord", "period", "freq", "temp", "press"|
 
 ## Filtri
+I filtri sono implementati utilizzando il costrutto java Predicate della libreria java.util.function. La classe Filter, contenuta nel package msn.weather_app.util.filter, è una classe generica avente come unico attributo un oggetto di tipo Predicate, un metodo buildLogic() che setta l'oggetto di tipo Predicato, i metodi andCat() e orCat() che restituiscono un oggetto Predicate corrispondente alla concatenazione rispettivamente in AND e in OR di due oggetti Predicate. Il parametro T rappresenta il tipo di dato (City o RecordMeteo) corrispondente alla Collection alla quale è applicato il filtro. Le ulteriori classi presenti nel package Filter estendono la classe Filter, sovrascrivendo il metodo buildLogic() che costruisce l'oggetto di tipo Predicate in base alla funzionalità del filtro specifico.
+L'applicazione del filtro a una Collection di oggetti City e RecordMeteo è sviluppata dalla classe generica FilterService, avente come parametro il tipo di dato T. FilterService contiene il metodo applyFilter che dato un ArrayList del tipo T e un filtro del tipo T, restituisce l'ArrayList filtrato. In particolare il metodo applyFilter utilizza il metodo stream().filter(Predicate).collect(Collectors.toList()) della classe List, importato da java.util.stream.Collectors.
+
+I filtri possono essere utilizzati nelle rotte POST dell'applicativo. La seguente immagine mostra un esempio di JSONObject contenente i campi applicabili nel filtro.
+I campi del filtro presenti nel JSONObject sono concatenati di default in AND.
+
+<IMMAGINE>
+  
+<ESEMPIO FILTRO>
 
 ## Statistiche
+Le statistiche relative a pressione e temperatura sono visualizzabili separatamente con le rotte POST "stats/temp" e "stats/press". Entrambe le rotte restituiscono un JSONObject contenente le statistiche di temperatura e pressione filtrate, inerenti il periodo (campo "period") selezionato e suddivise in base alla periodicità richiesta (campo "freq"). A livello implementativo, ogni statistica è rappresentata da un oggetto di tipo HashMap < String, HashMap < String, Double> > costruito dalla classe StatsCalculator contenuta nel package stats.
+
+<ESEMPIO STATISTICHE>
+
 
 ## Diagramma delle classi
 
