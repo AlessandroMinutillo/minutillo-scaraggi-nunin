@@ -2,11 +2,29 @@
 #### Minutillo Alessandro, Scaraggi Vito, Nunin Davide
 
 ## Descrizione
-L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di monitoraggio del meteo mediante l'utilizzo dell'API OpenWeatherMap.
+L'applicazione da noi sviluppata consiste in un restful web service che implementa un servizio di monitoraggio del meteo mediante l'utilizzo dell'API OpenWeatherMap. 
 
-## Funzionamento
+## Software richiesti
+1) IDE (ambiente di sviuppo)
+2) Suite Spring Tools for Java
+3) JVM (Java Virtual Machine) (Possibilmente la versione più recente)
+4) Postman "lato client" (per eseguire le varie rotte implementate nel progetto)
+
+## Istruzioni
+1) Installare GIT / GitBash sul prprio sistema operativo
+2) Aprire il terminale nella cartella desiderata e digitare il seguente comando "git clone https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin"
+3) Importare il progetto nell'IDE 
+4) Avviare la Springboot Application (la quale sarà in ascolto sulla porta 8080)
+5) Eseguire le possibili richieste implementate su Postman
+
+## Diagramma dei casi d'uso
+Mediante il nostro applicativo l'utente potrà: 
+1) Ricercare il valore della temperatura e della pressione attuale mediante l'utilizzo di coordinate GPS
+2) Effettuare delle statitstiche su range personalizzabili e non riguardanti pressione e temperatura
+3) Ricercare coordinate GPS di una determinata cittò utilizzando stringhe e sottostringhe
 
 ![Casi d'uso](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/use_case_diagram.jpg)
+
 ## Rotte utilizzabili
 
 |Rotte|Metodo|Descrizione|Campo|
@@ -30,10 +48,6 @@ L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di
 - msn.weather_app
 
 ![application](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/packages.jpg)
-
-- msn.weather_app.controller
-
-![controller](link)
 
 - msn.weather_app.database
 
@@ -67,39 +81,39 @@ L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di
 
 - /metadata
 
-![metadata](link)
+![metadata](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/metadata.jpg)
 
 - /data/city
 
-![data/city](link)
+![data/city](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/data_city.jpg)
 
 - /data/sampled
 
-![data/sampled](link)
+![data/sampled](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/data_sampled.jpg)
 
 - /data/meteo
 
-![data/meteo](link)
+![data/meteo](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/data_meteo.jpg)
 
 - /data/meteo/filtered
 
-![data/meteo/filtered](link)
+![data/meteo/filtered](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/data_meteo_filtered.jpg)
 
 - /dictionary
 
-![dictionary](link)
+![dictionary](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/dictionary.jpg)
 
 - /now
 
-![now](link)
+![now](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/now.jpg)
 
 - /stats/temp
 
-![stats/temp](link)
+![stats/temp](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/stats_temp.jpg)
 
 - /stats/press
 
-![stats/press](link)
+![stats/press](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/stats_press.jpg)
 
 ## Suddivisione del lavoro
 - Minutillo Alessandro 33,3%
