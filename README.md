@@ -6,7 +6,7 @@ L'applicazione da noi sviluppata consiste nell'implementazione di un servizio di
 
 ## Funzionamento
 
-![Casi d'uso](link)
+![Casi d'uso](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/use_case_diagram.jpg)
 ## Rotte utilizzabili
 
 |Rotte|Metodo|Descrizione|Campo|
