@@ -69,8 +69,10 @@ JSON in output:
 
 ![Filter_Example2](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_data.JPG)
 
+La struttura dati restituita è un HashMap<String,ArrayList<RecordMeteo>>.
+
 ## Statistiche
-Le statistiche relative a pressione e temperatura sono visualizzabili separatamente con le rotte POST "stats/temp" e "stats/press". Entrambe le rotte restituiscono un JSONObject contenente le statistiche di temperatura e pressione filtrate, inerenti il periodo (campo "period") selezionato e suddivise in base alla periodicità richiesta (campo "freq"). A livello implementativo, ogni statistica è rappresentata da un oggetto di tipo HashMap < String, HashMap < String, Double> > costruito dalla classe StatsCalculator contenuta nel package stats.
+Le statistiche relative a pressione e temperatura sono visualizzabili separatamente con le rotte POST "stats/temp" e "stats/press". Entrambe le rotte restituiscono un JSONObject contenente le statistiche di temperatura e pressione filtrate, inerenti il periodo (campo "period") selezionato e suddivise in base alla periodicità richiesta (campo "freq"). A livello implementativo, ogni statistica è rappresentata da un oggetto di tipo HashMap<String,HashMap<String,Double>> costruito dalla classe StatsCalculator contenuta nel package stats.
 
 Esempio statistiche - rotta "stats/temp"
 
@@ -86,6 +88,7 @@ JSON in output:
 
 ![Stats_Example1](https://github.com/AlessandroMinutillo/minutillo-scaraggi-nunin/blob/master/img/es_stat.JPG)
 
+La struttura dati restituita è un HashMap<String,HashMap<String,Double>>.
 
 ## Diagrammi delle classi
 
